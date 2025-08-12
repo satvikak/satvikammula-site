@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Me</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="icon" href="../favicon.png" type="image/png" />
+</head>
+<body>
+  <!-- Dark Mode Toggle -->
+  <button id="changeTheme" onclick="actuallyChangeTheme()">☀️</button>
+
+  <!-- Page Title -->
+  <header class="mainTitle">
+    <h1>About Me!</h1>
+  </header>
+
+  <!-- Name Header -->
+  <section class="session">
+    <h2>Satvi Kammula</h2>
+  </section>
+
+  <!-- About Me Section -->
+  <div class="sideBySide aboutSection">
+
+    <!-- Profile Picture in Circle -->
+    <div class="DPBubble profileCircle">
+      <img src="../LinkedinPFP.jpeg" alt="Satvi Kammula" class="profilePic" />
+    </div>
+
+    <!-- Bio -->
+    <div class="LPBubble aboutBio">
+      <p>
+        Hi! I’m Satvi, an incoming 4th-year Computer Science student at UC San Diego with a love for all things AI and machine learning. I’m especially fascinated by how technology can transform healthcare, from medical image segmentation to smarter diagnostic tools. When I’m not experimenting with models or fine-tuning neural nets, you’ll find me diving into new datasets, catching up on the latest AI breakthroughs, or tinkering with side projects just for fun.
+      </p>
+    </div>
+  </div>
+  <section class="mainSections">
+  <div class="sectionTitle DPBubble">
+    <h2>Education</h2>
+  </div>
+  <div class="LPBubble">
+  <div class="LPBubble">
+    <h3>University of California, San Diego</h3>
+    <ul>
+      <li>B.S. in Computer Science</li>
+    </ul>
+  </div>
+  </div>
+</section>
+
+<!-- Technical Skills and Certifications Section -->
+<section class="mainSections">
+  <div class="sectionTitle DPBubble">
+    <h2>Technical Skills and Certifications</h2>
+  </div>
+
+  <!-- Programming Languages -->
+  <div class="LPBubble">
+    <h3>Programming Languages</h3>
+    <ul>
+      <li>Python, C++, Java, JavaScript, C</li>
+    </ul>
+  </div>
+
+  <!-- Frameworks/Libraries -->
+  <div class="LPBubble">
+    <h3>Frameworks / Libraries</h3>
+    <ul>
+      <li>PyTorch, TensorFlow, scikit-learn, NumPy, Pandas, OpenCV, Hugging Face Transformers</li>
+    </ul>
+  </div>
+
+  <!-- Developer Tools -->
+  <div class="LPBubble">
+    <h3>Developer Tools</h3>
+    <ul>
+      <li>Git, GitHub, Linux, Valgrind, GoogleTest, CMake, VSCode</li>
+    </ul>
+  </div>
+
+  <!-- Certifications -->
+  <div class="LPBubble">
+    <h3>Certifications</h3>
+    <ul>
+      <li>Harvard CS50 AI with Python</li>
+    </ul>
+  </div>
+</section>  
+  
+<!-- Experience Section -->
+<section class="mainSections">
+  <div class="sectionTitle DPBubble">
+    <h2>Experience</h2>
+  </div>
+
+  <div class="LPBubble">
+    <h3>Undergraduate Researcher at UC San Diego Health</h3>
+    <ul>
+      <li>
+        Designing deep learning models (U-Net, U-Net++) for automated segmentation of 3D medical volumes (MRI, ultrasound) to support diagnostic workflows in liver imaging.
+      </li>
+      <li>
+        Improving model robustness via preprocessing of volumetric NIfTI data: normalization, slicing, and augmentation.
+      </li>
+      <li>
+        Investigating interpretability of medical AI tools in collaboration with clinicians and imaging specialists.
+      </li>
+    </ul>
+  </div>
+</section>
+  
+<!-- Projects Section -->
+<section class="mainSections">
+  <div class="sectionTitle DPBubble">
+    <h2>Projects</h2>
+  </div>
+
+  <!-- Climate Pattern Prediction -->
+  <div class="LPBubble">
+    <h3>Climate Pattern Prediction</h3>
+    <ul>
+      <li>
+        Developed and fine-tuned a U-Net with attention mechanism for predicting spatiotemporal climate patterns, achieving a Kaggle score of 0.9398 and placing top 25% in CSE151B leaderboard.
+      </li>
+      <li>
+        Benchmarked performance across multiple architectures, including baseline CNNs, DenseNet, ResNet, and U-Net variants, optimizing model accuracy and generalization.
+      </li>
+      <li>
+        Visualized spatial loss maps and attention weights to identify high-error regions and inform iterative design refinements.
+      </li>
+    </ul>
+  </div>
+
+  <!-- Green Lens -->
+  <div class="LPBubble">
+    <h3>Green Lens</h3>
+    <ul>
+      <li>
+        Collaborated in group of 4 in CSE156 to design and deploy a real-time system for retrieving peer-reviewed climate science articles based on user arguments, using FastAPI, Streamlit, and OpenAI’s GraphRAG architecture.
+      </li>
+      <li>
+        Engineered high-performance retrieval pipeline using BERT+FAISS, BM25, and TF-IDF, achieving a top relevance score of 0.78 with query latency under 7 seconds.
+      </li>
+      <li>
+        Automated citation generation and structured evidence summarization to improve transparency and scalability.
+      </li>
+    </ul>
+  </div>
+
+  <!-- Traffic Sign Classifier -->
+  <div class="LPBubble">
+    <h3>Traffic Sign Classifier</h3>
+    <ul>
+      <li>
+        Built an end-to-end image classifier using TensorFlow and Keras to recognize 43 traffic sign classes from GTSRB dataset with 97% accuracy.
+      </li>
+      <li>
+        Implemented a multi-stage CNN architecture with data preprocessing (OpenCV), stratified training/test splits, and model evaluation.
+      </li>
+      <li>
+        Evaluated model performance with real-world generalization in mind, emphasizing architectural balance between accuracy and inference speed.
+      </li>
+    </ul>
+  </div>
+</section>
+
+  <script src="../script.js"></script>
+</body>
+</html>
