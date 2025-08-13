@@ -9,7 +9,7 @@ This repository contains my work for CSE135's HW 1 for Summer Session 2 2025. Yo
 - Site IP Address: 137.184.189.190
 - Grader Server Login
   - username: grader
-  - passphrase for SSH keyL GraderSpecialServerAccess25
+  - passphrase for SSH key: GraderSpecialServerAccess25
   - sudo password for grader: websiteGraderAccess0825
 -  Private SSH Key is in the Github submission!
 
