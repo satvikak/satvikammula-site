@@ -6,7 +6,14 @@ This repository contains my work for CSE135's HW 1 for Summer Session 2 2025. Yo
 - This was a solo project completed by me, Satvi Kammula. For additional reference, my email is [sakammula@ucsd.edu](sakammula@ucsd.edu) and my PID is A18503110.
 
 ## Grader Access
-- TBA
+- Site IP Address: 137.184.189.190
+- Grader Server Login
+  - username: grader
+  - passphrase for SSH keyL GraderSpecialServerAccess25
+  - sudo password for grader: websiteGraderAccess0825
+-  Private SSH Key is in the Github submission!
+
+* Note: I was able to access the grader account by first copy pasting the below private key into a nano file. Then, I ran ssh -i "insert nano file name" grader@137.184.189.190.
 
 ## Website Link
 - As stated above, my site can be found at [satvikammula.site](satvikammula.site). Here, you can find some more information about me, as well as additional links pertaining to the homework.
