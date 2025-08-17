@@ -12,6 +12,9 @@ print start_html("Environment Variables");
 
 print "<h1 align='center'>Environment Variables</h1><hr />";
 
+$ENV{'SERVER_SIGNATURE'} = 'CSE135 Server Server at cse135.site Port 443';
+$ENV{'SERVER_SOFTWARE'}  = 'CSE135 Server';
+
 # Loop through all of the environment variables, then print each variable and its value
 foreach my $key (sort(keys(%ENV))) {
    print  "$key = $ENV{$key}<br />\n";
