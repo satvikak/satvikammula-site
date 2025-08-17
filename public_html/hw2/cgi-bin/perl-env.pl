@@ -2,7 +2,11 @@
 print "Cache-Control: no-cache\n";
 print "Content-type: text/html \n\n";
 
-# print HTML file top
+# Custom server signature and software
+my $custom_signature = "CSE135 Server Server at cse135.site Port 443";
+my $custom_software  = "CSE135 Server";
+
+# Print HTML file top
 print <<END;
 <!DOCTYPE html>
 <html><head><title>Environment Variables</title>
@@ -11,8 +15,14 @@ print <<END;
 END
 
 # Loop over the environment variables and print each variable and its value
-foreach $variable (sort keys %ENV) {
-  print "<b>$variable:</b> $ENV{$variable}<br />\n";
+foreach my $variable (sort keys %ENV) {
+    if ($variable eq 'SERVER_SIGNATURE') {
+        print "<b>$variable:</b> $custom_signature<br />\n";
+    } elsif ($variable eq 'SERVER_SOFTWARE') {
+        print "<b>$variable:</b> $custom_software<br />\n";
+    } else {
+        print "<b>$variable:</b> $ENV{$variable}<br />\n";
+    }
 }
 
 # Print the HTML file bottom
