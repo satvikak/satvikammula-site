@@ -3,7 +3,7 @@ print "Cache-Control: no-cache\n";
 print "Content-type: text/html \n\n";
 
 # Custom server signature and software
-my $custom_signature = "CSE135 Server Server at cse135.site Port 443";
+my $custom_signature = "CSE135 Server Server at satvikammula.site Port 443";
 my $custom_software  = "CSE135 Server";
 
 # Print HTML file top

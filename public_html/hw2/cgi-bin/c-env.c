@@ -4,7 +4,7 @@
 int main(int argc, char **argv, char **envp)
 {
 
-  setenv("SERVER_SIGNATURE", "CSE135 Server Server at cse135.site Port 443", 1);
+  setenv("SERVER_SIGNATURE", "CSE135 Server Server at satvikammula.site Port 443", 1);
   setenv("SERVER_SOFTWARE",  "CSE135 Server", 1);
 
   // print HTML header	
