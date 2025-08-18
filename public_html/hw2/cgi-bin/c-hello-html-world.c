@@ -15,7 +15,16 @@ int main(void)
 
  printf("Hello World<br/>\n");
  printf("This program was generated at: %s\n<br/>", ctime(&t));
- printf("Your current IP address is: %s<br/>", getenv("REMOTE_ADDR"));
+
+ char *actualIP = getenv("HTTP_X_FORWARDED_FOR");
+ if(actualIP==NULL) {
+  actualIP = getenv("REMOTE_ADDR");
+ }
+ if(actualIP==NULL) {
+  actualIP = "unknown";
+ }
+
+ printf("Your current IP address is: %s<br/>", actualIP);
  
  // Print HTML footer
  printf("</body></html>");

@@ -11,6 +11,15 @@ int main(void) {
 	printf("Content-type: application/json\r\n\r\n");
 	printf("{\n\t\"message\": \"Hello World\",\n");
 	printf("\t\"date\": \"%s\",\n", buffer);
-	printf("\t\"currentIP\": \"%s\"\n}\n", getenv("REMOTE_ADDR"));
+
+	char *actualIP = getenv("HTTP_X_FORWARDED_FOR");
+	if(actualIP==NULL) {
+		actualIP = getenv("REMOTE_ADDR");
+	}
+	if(actualIP==NULL) {
+		actualIP = "unknown";
+	}
+
+	printf("\t\"currentIP\": \"%s\"\n}\n", actualIP);
 	return 1;
 }

@@ -15,7 +15,7 @@ $date = localtime();
 print "<p>Current Time: $date</p>";
 
 # IP Address is an environment variable when using CGI
-$address = $ENV{REMOTE_ADDR};
+$address = $ENV{"HTTP_X_FORWARDED_FOR"} || $ENV{"HTTP_X_REAL_IP"} || $ENV{REMOTE_ADDR};
 print "<p>Your IP Address: $address</p>";
 
 print "</body>";
