@@ -1,5 +1,6 @@
 <?php
 
+// Set server name properly since we are reverse proxying with nginx
 $_SERVER['SERVER_SIGNATURE'] = "CSE135 Server Server at satvikammula.site Port 443";
 $_SERVER['SERVER_SOFTWARE'] = "CSE135 Server";
 

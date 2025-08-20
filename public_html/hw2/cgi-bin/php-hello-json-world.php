@@ -12,6 +12,7 @@ echo "\t\"heading\":\"Satvi was here - Hello PHP\", \n";
 echo "\t\"message\": \"This response was generated with the PHP programming language\", \n";
 echo "\t\"date\": \"$buffer\", \n";
 
+// Get actual IP because we are forwarding from nginx to apache
 $actualIP = getenv("HTTP_X_FORWARDED_FOR");
 if(!$actualIP) {
     $actualIP = getenv("REMOTE_ADDR");

@@ -14,7 +14,7 @@ print "<p>This page was generated with the Perl programming langauge</p>";
 $date = localtime();
 print "<p>Current Time: $date</p>";
 
-# IP Address is an environment variable when using CGI
+# Get actual IP because we are forwarding from nginx to apache
 $address = $ENV{"HTTP_X_FORWARDED_FOR"} || $ENV{"HTTP_X_REAL_IP"} || $ENV{REMOTE_ADDR};
 print "<p>Your IP Address: $address</p>";
 

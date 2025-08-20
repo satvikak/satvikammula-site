@@ -12,6 +12,7 @@ int main(void) {
 	printf("{\n\t\"message\": \"Satvi was here - Hello World\",\n");
 	printf("\t\"date\": \"%s\",\n", buffer);
 
+	// Get actual IP because we are forwarding from nginx to apache
 	char *actualIP = getenv("HTTP_X_FORWARDED_FOR");
 	if(actualIP==NULL) {
 		actualIP = getenv("REMOTE_ADDR");

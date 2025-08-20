@@ -15,6 +15,7 @@ def main():
     print("Satvi was here - Hello Python World!<br/>")
     print("This program was generated with the Python programming language at: %s\n<br/>" % time.ctime(timeT))
 
+    # Get actual IP because we are forwarding from nginx to apache
     actualIP = os.getenv("HTTP_X_FORWARDED_FOR")
     if actualIP is None:
         actualIP = os.getenv("REMOTE_ADDR")

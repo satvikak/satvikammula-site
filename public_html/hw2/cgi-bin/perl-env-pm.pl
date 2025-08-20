@@ -12,6 +12,7 @@ print start_html("Environment Variables");
 
 print "<h1 align='center'>Environment Variables</h1><hr />";
 
+# Set server names properly since we are reverse proxying using nginx
 $ENV{'SERVER_SIGNATURE'} = 'CSE135 Server Server at satvikammula.site Port 443';
 $ENV{'SERVER_SOFTWARE'}  = 'CSE135 Server';
 

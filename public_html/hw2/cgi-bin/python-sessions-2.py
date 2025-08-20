@@ -6,18 +6,23 @@ from pythonSessionHelper import pythonSessionHelper
 
 def main():
 
+    # Read cookies from HTTP request headers
     cookie = cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
     
+    # Get session id
     if(cookie.get("CGISESSID")):
         sessionID = (cookie.get("CGISESSID")).value
     else:
         sessionID = None
 
+    # Create a new session/get existing session
     newSession = pythonSessionHelper(sessionID)
+    # Retrieve username from session
     name = newSession.getUsername()
 
     print("Cache-Control: no-cache")
     print("Content-Type: text/html")
+    # Make sure session is consistent by setting cookie in header
     print(f'Set-Cookie: CGISESSID={newSession.sessionID}; Path=/hw2/cgi-bin')
     print()
 

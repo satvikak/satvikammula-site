@@ -16,6 +16,7 @@ int main(void)
  printf("Satvi was here - Hello World<br/>\n");
  printf("This program was generated at: %s\n<br/>", ctime(&t));
 
+// Get actual IP because we are forwarding from nginx to apache
  char *actualIP = getenv("HTTP_X_FORWARDED_FOR");
  if(actualIP==NULL) {
   actualIP = getenv("REMOTE_ADDR");

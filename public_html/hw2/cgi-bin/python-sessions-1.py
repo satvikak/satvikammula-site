@@ -6,25 +6,33 @@ from http import cookies
 from pythonSessionHelper import pythonSessionHelper
 
 def main():
+
+    # Parse input from user
     inputField = cgi.FieldStorage()
 
+    # Get cookies from HTTP headers
     cookie = cookies.SimpleCookie(os.environ.get("HTTP_COOKIE"))
     
+    # Get sessionID
     if(cookie.get("CGISESSID")):
         sessionID = (cookie.get("CGISESSID")).value
     else:
         sessionID = None
 
+    # Make a new session, or load a pre-existing session
     newSession = pythonSessionHelper(sessionID)
+    # Get name directly from user form
     name = inputField.getfirst("username")
 
+    # Make adjustments for a new username if entered
     if(name):
         newSession.setUsername(name)
-    
+    # Get the updated/current username
     name = newSession.getUsername()
 
     print("Cache-Control: no-cache")
     print("Content-Type: text/html")
+    # Make sure session is consistent by setting cookie in header
     print(f'Set-Cookie: CGISESSID={newSession.sessionID}; Path=/hw2/cgi-bin')
     print()
 

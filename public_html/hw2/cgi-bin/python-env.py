@@ -3,6 +3,8 @@
 import os
 
 def main():
+
+    # Properly set server since we are reverse proxying using nginx 
     os.environ["SERVER_SIGNATURE"] = "CSE135 Server Server at satvikammula.site Port 443"
     os.environ["SERVER_SOFTWARE"] = "CSE135 Server"
 

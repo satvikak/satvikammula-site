@@ -20,6 +20,7 @@ def main():
         for piece in rawQuery.split("&"):
             pieces = piece.split('=')
             if(len(pieces)==2):
+                # Account for special characters and split by "=" and "&"
                 # var, val = pieces
                 var = urllib.parse.unquote(pieces[0])
                 val = urllib.parse.unquote(pieces[1])

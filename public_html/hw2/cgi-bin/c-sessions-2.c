@@ -17,11 +17,17 @@ int main(int argc, char **argv, char **envp)
 
   if (getenv("HTTP_COOKIE") != NULL && strcmp(getenv("HTTP_COOKIE"), "destroyed"))
   {
+    // Get environment variable
     char* cookies = getenv("HTTP_COOKIE");
+    // Make buffer to store username
     char cookieVal[1000] = "";
+    // Find first semicolon (where username ends)
     char *stopSpot = strchr(cookies, ';');
+    // Calculate username length
     size_t len = stopSpot - cookies;
+    // Copy length of username from cookies to cookieVal
     strncpy(cookieVal, cookies, len);
+    // Null-terminate string
     cookieVal[len] = '\0';
     printf("<tr><td>Cookie:</td><td>%s</td></tr>\n", cookieVal);
   }

@@ -6,6 +6,7 @@ print "Cache-Control: no-cache\n";
 print "Content-type: application/json\n\n";
 
 $date = localtime();
+# Get actual IP because we are forwarding from nginx to apache
 $address = $ENV{"HTTP_X_FORWARDED_FOR"} || $ENV{"HTTP_X_REAL_IP"} || $ENV{REMOTE_ADDR};
 
 my %message = ('title' => 'Hello, Perl!', 'heading' => 'Satvi was here - Hello, Perl!', 'message' => 'This page was generated with the Perl programming language', 'time' => $date, 'IP' => $address);

@@ -16,6 +16,7 @@ def main():
     print(f'\t"message": "This response was generated with the Python programming language", ')
     print(f'\t"date": "{buffer}", ')
 
+    # Get actual IP because we are forwarding from nginx to apache
     actualIP = os.getenv("HTTP_X_FORWARDED_FOR")
     if actualIP is None:
         actualIP = os.getenv("REMOTE_ADDR")

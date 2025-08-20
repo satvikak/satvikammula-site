@@ -19,6 +19,7 @@ if($rawQuery) {
     foreach($pieces as $piece) {
         $item = explode("=", $piece);
         if(count($item)==2) {
+            // Make sure we account for special characters and split by "=" and "&"
             list($var, $val) = $item;
             $var = urldecode($var);
             $val = urldecode($val);

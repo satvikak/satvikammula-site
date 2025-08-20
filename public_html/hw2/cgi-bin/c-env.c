@@ -4,6 +4,7 @@
 int main(int argc, char **argv, char **envp)
 {
 
+  // Set server names properly since we are reverse proxying using nginx
   setenv("SERVER_SIGNATURE", "CSE135 Server Server at satvikammula.site Port 443", 1);
   setenv("SERVER_SOFTWARE",  "CSE135 Server", 1);
 

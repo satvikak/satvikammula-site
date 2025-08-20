@@ -11,6 +11,7 @@ echo "<html><head><title>Hello, PHP!</title></head>
 echo "Satvi was here - Hello PHP World! <br/>";
 echo "This program was generated with the PHP programming language at: " . date("r", $timeT) . "<br/>";
 
+// Get actual IP because we are forwarding from nginx to apache
 $actualIP = getenv("HTTP_X_FORWARDED_FOR");
 if(!$actualIP) {
     $actualIP = getenv("REMOTE_ADDR");
