@@ -1,9 +1,14 @@
-# CSE135 HW1: Client Side Basics, Site and Server Configuration
+# CSE135: Online Database Analytics
 
-This repository contains my work for CSE135's HW 1 for Summer Session 2 2025. You can find my site for this assignment at [satvikammula.site](satvikammula.site).
+This repository contains my work for CSE135's HWs for Summer Session 2 2025. You can find my site for this assignment at [satvikammula.site](satvikammula.site).
 
 ## Group Members
 - This was a solo project completed by me, Satvi Kammula. For additional reference, my email is [sakammula@ucsd.edu](sakammula@ucsd.edu) and my PID is A18503110.
+
+## Site Login Info
+- My site is password protected to keep it safe from potential attacks. The login information can be seen below:
+  - Username: satvi
+  - Password: SatviServerSummer2025
 
 ## Grader Access
 - Site IP Address: 137.184.189.190
@@ -15,18 +20,20 @@ This repository contains my work for CSE135's HW 1 for Summer Session 2 2025. Yo
 
 * Note: I was able to access the grader account by first copy pasting the below private key into a nano file. Then, I ran ssh -i "insert nano file name" grader@137.184.189.190.
 
-## Website Link
+## CSE135 HW2: Server Side Basics Done 3+ Ways
+
+## HW2 Website Links
+- As stated above, my site can be found at [satvikammula.site](satvikammula.site). If you look under the HW2 section on the site, you can find all of the Perl, C, Python, and PHP files pertaining to this assignment.
+
+## CSE135 HW1: Client Side Basics, Site and Server Configuration
+
+## HW1 Website Links
 - As stated above, my site can be found at [satvikammula.site](satvikammula.site). Here, you can find some more information about me, as well as additional links pertaining to the homework.
 - For more convenient access some of the webpages I designed for this assignment are listed:
   - [About Page](https://satvikammula.site/members/satvikammula.html)
   - [robots.txt](https://satvikammula.site/robots.txt)
   - [hello.php](https://satvikammula.site/hw1/hello.php)
   - [report.html](https://satvikammula.site/hw1/report.html)
- 
-## Site Login Info
-- Furthermore, my site is password protected to keep it safe from potential attacks. The login information can be seen below:
-  - Username: satvi
-  - Password: SatviServerSummer2025
 
 ## Details of Github Deployment Setup
 - To get started, I followed the provided tutorial to connect my GitHub repository to my server. I began by creating a repo with copies of all my site’s files, and then linked that repo to the correct website directory on my server. After that, I carefully set up the post-receive hook so that I could test local pushes and make sure they updated the site properly.
