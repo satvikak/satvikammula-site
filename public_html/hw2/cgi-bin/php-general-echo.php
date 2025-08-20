@@ -14,10 +14,12 @@ echo "<html><head><title>General Request Echo</title></head>
 
 $sProt = getenv("SERVER_PROTOCOL");
 $rMethod = getenv("REQUEST_METHOD");
+$qString = getenv("QUERY_STRING");
 
 echo "<table>\n";
 echo "<tr><td>Protocol:</td><td>$sProt</td></tr>\n";
 echo "<tr><td>Method:</td><td>$rMethod</td></tr>\n";
+echo "<tr><td>Query String:</td><td>$qString</td></tr>\n";
 echo "<tr><td>Message Body:</td><td>$toPost</td></tr>\n";
 echo "</table>";
 

@@ -8,7 +8,7 @@ header("Cache-Control: no-cache");
 header("Content-type: application/json");
 
 echo "{\n";
-echo "\t\"heading\":\"Hello PHP\", \n";
+echo "\t\"heading\":\"Satvi was here - Hello PHP\", \n";
 echo "\t\"message\": \"This response was generated with the PHP programming language\", \n";
 echo "\t\"date\": \"$buffer\", \n";
 

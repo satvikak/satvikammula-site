@@ -15,6 +15,7 @@ int main(int argc, char **argv, char **envp)
   printf("<table>\n");
   printf("<tr><td>Protocol:</td><td>%s</td></tr>\n", getenv("SERVER_PROTOCOL"));
   printf("<tr><td>Method:</td><td>%s</td></tr>\n", getenv("REQUEST_METHOD"));
+  printf("<tr><td>Query String:</td><td>%s</td></tr>\n", getenv("QUERY_STRING"));
   printf("<tr><td>Message Body:</td><td> %s</td></tr>\n", fgets(str, 1000, stdin));
   
   // Print HTML footer

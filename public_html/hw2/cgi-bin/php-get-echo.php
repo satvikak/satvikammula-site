@@ -12,7 +12,7 @@ if(!$rawQuery) {
 }
 
 echo "Raw query string: $rawQuery\n<br/><br/>";
-echo "<table> Formatted Query String: </table>";
+echo "<table> Formatted Query String: ";
 
 if($rawQuery) {
     $pieces = explode("&", $rawQuery);
@@ -20,10 +20,14 @@ if($rawQuery) {
         $item = explode("=", $piece);
         if(count($item)==2) {
             list($var, $val) = $item;
+            $var = urldecode($var);
+            $val = urldecode($val);
             echo "<tr><td>" . htmlspecialchars($var) . ":</td><td>" . htmlspecialchars($val) . "</td></tr>\n";
         }
     }
 }
+
+echo "</table>";
 
 echo "</body></html>"
 

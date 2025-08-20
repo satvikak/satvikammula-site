@@ -43,7 +43,13 @@ int main(int argc, char **argv, char **envp)
   }
   else if (getenv("HTTP_COOKIE") != NULL && strcmp(getenv("HTTP_COOKIE"), "destroyed"))
   {
-    printf("<tr><td>Cookie:</td><td>%s</td></tr>\n", getenv("HTTP_COOKIE"));
+    char* cookies = getenv("HTTP_COOKIE");
+    char cookieVal[1000] = "";
+    char *stopSpot = strchr(cookies, ';');
+    size_t len = stopSpot - cookies;
+    strncpy(cookieVal, cookies, len);
+    cookieVal[len] = '\0';
+    printf("<tr><td>Cookie:</td><td>%s</td></tr>\n", cookieVal);
   }
   else
   {

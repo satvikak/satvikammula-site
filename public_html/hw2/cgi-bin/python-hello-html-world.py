@@ -12,8 +12,8 @@ def main():
           <body><h1 align=center>Hello Python World</h1>\
           <hr/>\n")
     
-    print("This page was generated with the Python programming langauge<br/>")
-    print("This program was generated at: %s\n<br/>" % time.ctime(timeT))
+    print("Satvi was here - Hello Python World!<br/>")
+    print("This program was generated with the Python programming language at: %s\n<br/>" % time.ctime(timeT))
 
     actualIP = os.getenv("HTTP_X_FORWARDED_FOR")
     if actualIP is None:

@@ -12,9 +12,9 @@ def main():
     print("Content-type: application/json\n")
 
     print("{")
-    print(f'\t"heading": "Hello Python", ')
+    print(f'\t"heading": "Satvi was here - Hello Python", ')
     print(f'\t"message": "This response was generated with the Python programming language", ')
-    print(f'\t"date": {buffer}", ')
+    print(f'\t"date": "{buffer}", ')
 
     actualIP = os.getenv("HTTP_X_FORWARDED_FOR")
     if actualIP is None:

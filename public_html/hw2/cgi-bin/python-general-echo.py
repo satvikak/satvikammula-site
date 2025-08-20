@@ -20,10 +20,12 @@ def main():
 
     sProt = os.getenv("SERVER_PROTOCOL")
     rMethod = os.getenv("REQUEST_METHOD")
+    qString = os.getenv("QUERY_STRING")
 
     print("<table>\n")
     print(f"<tr><td>Protocol:</td><td>{sProt}</td></tr>")
     print(f"<tr><td>Method:</td><td>{rMethod}</td></tr>")
+    print(f"<tr><td>Query String:</td><td>{qString}</td></tr>")
     print(f"<tr><td>Message Body:</td><td>{toPost}</td></tr>")
     print("</table>")
 

@@ -8,8 +8,8 @@ echo "<html><head><title>Hello, PHP!</title></head>
         <body><h1 align=center>Hello PHP World</h1>
         <hr/>\n";
 
-echo "This page was generated with the PHP programming langauge<br/>";
-echo "This program was generated at: " . date("r", $timeT) . "<br/>";
+echo "Satvi was here - Hello PHP World! <br/>";
+echo "This program was generated with the PHP programming language at: " . date("r", $timeT) . "<br/>";
 
 $actualIP = getenv("HTTP_X_FORWARDED_FOR");
 if(!$actualIP) {
