@@ -33,6 +33,20 @@ if(!userSessionID) {
     localStorage.setItem("sessionID", userSessionID);
 }
 
+/**
+ * BELOW YOU CAN FIND HOW I COLLECT STATIC DATA
+ * THE ORDER THAT I COLLECT THEM IN IS IN COMMENTS OR IS SIMPLY:
+ * - userAgent
+ * - userLanguage
+ * - user accepts Cookies
+ * - user allows JS
+ * - user allows CSS
+ * - user screen dimensions
+ * - user window dimensions
+ * - user network connection type
+ * - user allows images
+ */
+
 // Function used to get all the necessary static and performance data
 function getStaticPerformanceData() {
     // Gets user agent string
@@ -59,11 +73,11 @@ function getStaticPerformanceData() {
         document.body.removeChild(testCSSObject);
     }
 
-    //Get user screen dimensions
+    //Get user's screen dimensions
     let userScreenHeight = window.screen.height;
     let userScreenWidth = window.screen.width;
 
-    // Get user window dimensions
+    // Get user's window dimensions
     let userWindowHeight = window.innerHeight;
     let userWindowWidth = window.innerWidth;
 
@@ -95,28 +109,37 @@ function getStaticPerformanceData() {
         localStorage.setItem("staticData", JSON.stringify(staticDataCheck));
     }
 
+/**
+ * BELOW YOU CAN FIND HOW I COLLECT PERFORMANCE DATA
+ * THE ORDER THAT I COLLECT THEM IN IS IN COMMENTS OR IS SIMPLY:
+ * - timing object
+ * - page load start
+ * - page load end
+ * - total load time
+ */
+
     // Create a container to store the performance data
     const performanceDataContainer = {};
     // Main mechanism for performance data collection
     if(performance.getEntriesByType && performance.getEntriesByType("navigation").length > 0) {
         const timeCheck = performance.getEntriesByType("navigation")[0]
-        // Get timing object
+        // Get whole timing object
         performanceDataContainer.timeObject = JSON.parse(JSON.stringify(timeCheck));
-        // Get page load start
+        // Get when page started loading
         performanceDataContainer.loadStart = timeCheck.startTime;
-        // Get page load end
+        // Get when page ended loading
         performanceDataContainer.loadEnd = timeCheck.loadEventEnd;
         // Get total load time
         performanceDataContainer.totalLoad = performanceDataContainer.loadEnd-performanceDataContainer.loadStart;
     }
-    // Fallback mechanism for performance data collection if previous is not enabled
+    // Mechanism for performance data collection if previous is not enabled
     else {
         const timeCheck = window.performance.timing;
-        // Get timing object
+        // Get whole timing object
         performanceDataContainer.timeObject = JSON.parse(JSON.stringify(timeCheck));
-        // Get page load start
+        // Get when page started loading
         performanceDataContainer.loadStart = timeCheck.navigationStart;
-        // Get page load end
+        // Get when page ended loading
         performanceDataContainer.loadEnd = timeCheck.loadEventEnd;
         // Get total load time
         performanceDataContainer.totalLoad = performanceDataContainer.loadEnd-performanceDataContainer.loadStart;
@@ -126,6 +149,19 @@ function getStaticPerformanceData() {
     performanceDataContainer.userSessionID = userSessionID;
     localStorage.setItem("performanceData", JSON.stringify(performanceDataContainer));
 }
+
+/**
+ * BELOW YOU CAN FIND HOW I COLLECT ACTIVITY DATA
+ * THE ORDER THAT I COLLECT THEM IN IS IN COMMENTS OR IS SIMPLY:
+ * - Any idle time (break end, break duration)
+ * - Page enter time
+ * - Cursor positions
+ * - Clicks
+ * - Scrolling
+ * - Key up/Key down
+ * - User left page
+ * - Which page user was on
+ */
 
 // Function to get the actual activity on the loaded page
 function getPageLoadData() {
@@ -176,6 +212,7 @@ function getPageLoadData() {
     let isIdle = false;
 
     // Function to track when the user is idle
+    // Any idle time where no activity happened for a period of 2 or more seconds
     function restartIdle() {
         // We stop checking for if the user is idle (basically if idle, we don't need to keep checking idleness)
         if(ifIdleCheck) {
@@ -191,7 +228,9 @@ function getPageLoadData() {
             activityItemMaker("idleBreak", {
                 // Actually format start, end, and duration of idleness
                 idleBreakStart: new Date(idleBreakStart).toISOString(),
+                // Record when the break ended
                 idleBreakEnd: new Date(idleBreakEnd).toISOString(),
+                // Record how long it lasted (in milliseconds)
                 idleDuration: totalIdle,                
             })
             // We make sure we aren't currently idle after movement, and idleness hasn't started yet
@@ -234,17 +273,17 @@ function getPageLoadData() {
         activityItemMaker("error", {errorMessage: errorEvent.message, errorLocation: errorEvent.filename, errorLine: errorEvent.lineno, errorCol: errorEvent.colno, errorObj: errorEvent.error ? errorEvent.error.toString() : null})   
     });
 
-    // We check for all mouse movement or cursor coordinates
+    // We check for all mouse movement or cursor positions (coordinates)
     window.addEventListener("mousemove", slowDown((event) => {
         activityItemMaker("mousemove", {xMove: event.clientX, yMove: event.clientY})
     }, 500));
 
-    // We check for clicks and which mouse button clicked
+    // We check for Clicks (and which mouse button it was)
     window.addEventListener("click", (event) => {
         activityItemMaker("click", {xClick: event.clientX, yClick: event.clientY, button: event.button})
     });
 
-    // We check for scrolling and its coordiates
+    // We check for Scrolling (coordinates of the scroll)
     window.addEventListener("scroll", (event) => {
         activityItemMaker("scroll", {xScroll: window.scrollX, yScroll: window.scrollY})
     });
@@ -275,7 +314,7 @@ function getPageLoadData() {
         // We track when the user left the page
         activityItemMaker("pageLeave", { pageLeaveTime: new Date().toISOString() });
         
-        // We track what page the user was on
+        // We track which page the user was on
         activityItemMaker("onPage", { onPage: window.location.href });
 
         // We use Blob to properly use application/json content types with sendBeacon calls
