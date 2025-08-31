@@ -19,8 +19,8 @@
 // Take care of some routing issues when data is posted
 // Ex. if /logs is visted, make sure you rerout to /json/logs for posting
 const serverUrl = window.location.hostname === "localhost" 
-  ? "http://localhost:3000/logs"
-  : "https://satvikammula.site/json/logs";
+  ? "http://localhost:3000/logs/"
+  : "https://satvikammula.site/json/logs/";
 
 // Create a global container to save all the activityData
 let activityDataContainer = []
@@ -165,27 +165,8 @@ function getStaticPerformanceData() {
 
 // Function to get the actual activity on the loaded page
 function getPageLoadData() {
-    // Used to send activity data to the server
-    async function sendServerData(data) {
-        // We try to use fetch to send the data
-        try {
-            let serverResponse = await fetch(serverUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            });
-            // Check if the response is good, otherwise we didn't store properly
-            if(!serverResponse.ok) {
-                throw new Error('Failed to send data to server');
-            }
-        }
-        // If the server didn't properly get the data, we shoot an error
-        catch (error) {
-            console.error("Error sending data:", error)
-        }
-    }
+    const sendOften = 15000;
+    const maxSize = 100;
 
     // Function to add a specific activity to the list of activities done in a session
     function activityItemMaker(userAction, data={}) {
@@ -197,15 +178,38 @@ function getPageLoadData() {
             ...data
         });
         // If there are >=25 activities in localStorage, we push it to the server to make space (don't want to hog local storage space)
-        if(activityDataContainer.length >= 25) {
+        if(activityDataContainer.length >= maxSize) {
             cleanoutActivityData();
         }
     };
 
+    // Used to clean up data every now and then so that localStorage is not overly full
+    async function cleanoutActivityData() {
+        // If there's nothing to clean, we continue
+        if(activityDataContainer.length === 0) {
+            return;
+        }
+        // If there are items to send to the server, we try to
+        const batchSend = activityDataContainer.splice(0, MAX_BATCH_SIZE);
+        try {
+            await sendServerData({
+                type: "Activity",
+                data: batchSend
+            });
+            // If some data was sent, we clear it
+            // Any unsent data stays in our container to try being sent again later
+            // activityDataContainer.splice(0, batchSend.length)
+            localStorage.setItem("activityDataContainer", JSON.stringify(activityDataContainer));
+        }
+        catch (error) {
+            // If there's an error, we log it
+            console.error("Error sending activity data", error);
+            activityDataContainer.unshift(...batch);
+        }
+    }
+
     // Used to periodically clean the local storage, another mechanism to not hog up the localServer space
-    const cleanoutTimer = setInterval(() => {
-        cleanoutActivityData()
-    }, 15000) // We check every 15000ms
+    setInterval(cleanoutActivityData, BATCH_INTERVAL);
 
     let idleBreakStart = null;
     let ifIdleCheck = null;
@@ -336,28 +340,30 @@ function getPageLoadData() {
         clearTimeout(ifIdleCheck);
     });
 
-    // Used to clean up data every now and then so that localStorage is not overly full
-    async function cleanoutActivityData() {
-        // If there's nothing to clean, we continue
-        if(activityDataContainer.length === 0) {
-            return;
+    // const cleanoutTimer = setInterval(() => {
+    //     cleanoutActivityData()
+    // }, 30000) // We check every 15000ms
+}
+
+// Used to send activity data to the server
+async function sendServerData(data) {
+    // We try to use fetch to send the data
+    try {
+        let serverResponse = await fetch(serverUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+        // Check if the response is good, otherwise we didn't store properly
+        if(!serverResponse.ok) {
+            throw new Error('Failed to send data to server');
         }
-        // If there are items to send to the server, we try to
-        const batchSend = [...activityDataContainer]
-        try {
-            await sendServerData({
-                type: "Activity",
-                data: batchSend
-            });
-            // If some data was sent, we clear it
-            // Any unsent data stays in our container to try being sent again later
-            activityDataContainer.splice(0, batchSend.length)
-            localStorage.setItem("activityDataContainer", JSON.stringify(activityDataContainer));
-        }
-        catch (error) {
-            // If there's an error, we log it
-            console.error("Error sending activity data", error);
-        }
+    }
+    // If the server didn't properly get the data, we shoot an error
+    catch (error) {
+        console.error("Error sending data:", error)
     }
 }
 
