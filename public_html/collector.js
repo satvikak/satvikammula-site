@@ -18,9 +18,15 @@
 
 // Take care of some routing issues when data is posted
 // Ex. if /logs is visted, make sure you rerout to /json/logs for posting
-const serverUrl = window.location.hostname === "localhost" 
-  ? "http://localhost:3000/logs/"
-  : "https://satvikammula.site/json/logs/";
+const apiBaseUrl = window.location.hostname === "localhost" 
+  ? "http://localhost:3001/api/"
+  : "https://satvikammula.site/api/";
+
+const endpoints = {
+    static: new URL("static/", apiBaseUrl).href,
+    performance: new URL("performance/", apiBaseUrl).href,
+    activity: new URL("activity/", apiBaseUrl).href
+};  
 
 // Create a global container to save all the activityData
 let activityDataContainer = []
@@ -190,10 +196,10 @@ function getPageLoadData() {
             return;
         }
         // If there are items to send to the server, we try to
-        const batchSend = activityDataContainer.splice(0, MAX_BATCH_SIZE);
+        const batchSend = activityDataContainer.splice(0, maxSize);
         try {
             await sendServerData({
-                type: "Activity",
+                type: "activity",
                 data: batchSend
             });
             // If some data was sent, we clear it
@@ -204,12 +210,12 @@ function getPageLoadData() {
         catch (error) {
             // If there's an error, we log it
             console.error("Error sending activity data", error);
-            activityDataContainer.unshift(...batch);
+            activityDataContainer.unshift(...batchSend);
         }
     }
 
     // Used to periodically clean the local storage, another mechanism to not hog up the localServer space
-    setInterval(cleanoutActivityData, BATCH_INTERVAL);
+    setInterval(cleanoutActivityData, sendOften);
 
     let idleBreakStart = null;
     let ifIdleCheck = null;
@@ -321,14 +327,15 @@ function getPageLoadData() {
         // We track which page the user was on
         activityItemMaker("onPage", { onPage: window.location.href });
 
-        // We use Blob to properly use application/json content types with sendBeacon calls
-        const activityBlob = new Blob(
-            // Properly format the activity data to send
-            [JSON.stringify({ type: "Activity", data: activityDataContainer })],
-            { type: "application/json" }
-        );
-        // Send activity data to the server
-        navigator.sendBeacon(serverUrl, activityBlob);
+
+        // Flatten container to avoid nested arrays
+        const flattened = activityDataContainer.flatMap(item => Array.isArray(item) ? item : [item]);
+
+        // Send each object individually
+        flattened.forEach(obj => {
+            const blob = new Blob([JSON.stringify(obj)], { type: "application/json" });
+            navigator.sendBeacon(endpoints.activity, blob);
+        });
 
         // Cleanup the activity data, so nothing is lingering
         activityDataContainer = [];
@@ -346,24 +353,39 @@ function getPageLoadData() {
 }
 
 // Used to send activity data to the server
+// Used to send activity, static, or performance data to the server
 async function sendServerData(data) {
-    // We try to use fetch to send the data
-    try {
-        let serverResponse = await fetch(serverUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-        // Check if the response is good, otherwise we didn't store properly
-        if(!serverResponse.ok) {
-            throw new Error('Failed to send data to server');
+    const url = endpoints[data.type];
+
+    // Helper to flatten any nested arrays and ensure everything is a single object
+    const flattenObjects = (items) =>
+        items.flatMap(item => Array.isArray(item) ? flattenObjects(item) : [item]);
+
+    if (data.type === "activity") {
+        let events = Object.values(data.data);
+        events = flattenObjects(events); // Flatten nested arrays
+
+        for (const event of events) {
+            const { id, ...cleanEvent } = event; // Remove client-side id
+            await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(cleanEvent)
+            });
         }
-    }
-    // If the server didn't properly get the data, we shoot an error
-    catch (error) {
-        console.error("Error sending data:", error)
+    } else {
+        // static + performance
+        let entries = Array.isArray(data.data) ? data.data : [data.data || data];
+        entries = flattenObjects(entries); // Flatten nested arrays if any
+
+        for (const entry of entries) {
+            const { id, ...cleanEntry } = entry;
+            await fetch(url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(cleanEntry)
+            });
+        }
     }
 }
 
@@ -378,25 +400,27 @@ function sendStaticData() {
         return;
     }
 
-    // Again, we use the blob technique to appropriately use sendBeacon
-    const blob = new Blob(
-        [JSON.stringify({ type: "Static", data: staticData })],
-        { type: "application/json" }
-    );
-    navigator.sendBeacon(serverUrl, blob);
+    sendServerData({ type: "static", data: staticData });
+
+    // // Again, we use the blob technique to appropriately use sendBeacon
+    // const blob = new Blob(
+    //     [JSON.stringify({ type: "Static", data: staticData })],
+    //     { type: "application/json" }
+    // );
+    // navigator.sendBeacon(serverUrl, blob);
 }
 
 // Used to send performance data to the server
 function sendPerformanceData() {
     // We check if there actually is performance data
     const performanceData = JSON.parse(localStorage.getItem("performanceData") || "{}");
-    
-    // Again, we use the blob technique to appropriately use sendBeacon
-    const blob = new Blob(
-        [JSON.stringify({ type: "Performance", data: performanceData })],
-        { type: "application/json" }
-    );
-    navigator.sendBeacon(serverUrl, blob);
+    sendServerData({ type: "performance", data: performanceData });
+    // // Again, we use the blob technique to appropriately use sendBeacon
+    // const blob = new Blob(
+    //     [JSON.stringify({ type: "Performance", data: performanceData })],
+    //     { type: "application/json" }
+    // );
+    // navigator.sendBeacon(serverUrl, blob);
 }
 
 // We actually get the static/performance data, send it to the server and start logging the activity data as well

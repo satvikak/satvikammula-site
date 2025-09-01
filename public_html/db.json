@@ -26,1545 +26,487 @@
   "profile": {
     "name": "typicode"
   },
-  "logs": [
+  "logs": [],
+  "static": [
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756524934948,
-          "idleBreakStart": "2025-08-30T03:32:26.384Z",
-          "idleBreakEnd": "2025-08-30T03:35:34.948Z",
-          "idleDuration": 188564
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageLeave",
-          "timestamp": 1756524934948,
-          "pageLeaveTime": "2025-08-30T03:35:34.948Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "onPage",
-          "timestamp": 1756524934948,
-          "onPage": "https://satvikammula.site/"
-        }
-      ],
+      "userAgentString": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "userLanguage": "en-US",
+      "userAcceptsCookies": true,
+      "userAllowsJS": true,
+      "userAllowsImages": true,
+      "userAllowsCSS": false,
+      "userScreenHeight": 864,
+      "userScreenWidth": 1383,
+      "userWindowHeight": 688,
+      "userWindowWidth": 697,
+      "userNetworkConnection": "4g",
+      "userSessionID": "sess_zh6bhsbnb",
       "id": 1
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756524937149,
-          "idleBreakStart": "2025-08-30T03:30:22.221Z",
-          "idleBreakEnd": "2025-08-30T03:35:37.149Z",
-          "idleDuration": 314928
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageLeave",
-          "timestamp": 1756524937149,
-          "pageLeaveTime": "2025-08-30T03:35:37.149Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "onPage",
-          "timestamp": 1756524937149,
-          "onPage": "https://satvikammula.site/"
-        }
-      ],
+      "userAgentString": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
+      "userLanguage": "en-US",
+      "userAcceptsCookies": true,
+      "userAllowsJS": true,
+      "userAllowsImages": true,
+      "userAllowsCSS": false,
+      "userScreenHeight": 864,
+      "userScreenWidth": 1383,
+      "userWindowHeight": 688,
+      "userWindowWidth": 697,
+      "userNetworkConnection": "4g",
+      "userSessionID": "sess_zh6bhsbnb",
+      "id": 2
+    }
+  ],
+  "performance": [
+    {
+      "timeObject": {
+        "name": "https://satvikammula.site/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 0,
+        "initiatorType": "navigation",
+        "deliveryType": "cache",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "workerStart": 9.400000005960464,
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 9.699999988079071,
+        "domainLookupStart": 9.699999988079071,
+        "domainLookupEnd": 9.699999988079071,
+        "connectStart": 9.699999988079071,
+        "secureConnectionStart": 9.699999988079071,
+        "connectEnd": 9.699999988079071,
+        "requestStart": 11.599999994039536,
+        "responseStart": 11.800000011920929,
+        "firstInterimResponseStart": 11.800000011920929,
+        "finalResponseHeadersStart": 0,
+        "responseEnd": 12.400000005960464,
+        "transferSize": 0,
+        "encodedBodySize": 1425,
+        "decodedBodySize": 5776,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 0,
+        "domContentLoadedEventStart": 0,
+        "domContentLoadedEventEnd": 0,
+        "domComplete": 0,
+        "loadEventStart": 0,
+        "loadEventEnd": 0,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null
+      },
+      "loadStart": 0,
+      "loadEnd": 0,
+      "totalLoad": 0,
+      "userSessionID": "sess_zh6bhsbnb",
+      "id": 1
+    },
+    {
+      "timeObject": {
+        "name": "https://satvikammula.site/",
+        "entryType": "navigation",
+        "startTime": 0,
+        "duration": 0,
+        "initiatorType": "navigation",
+        "deliveryType": "cache",
+        "nextHopProtocol": "http/1.1",
+        "renderBlockingStatus": "non-blocking",
+        "workerStart": 15.200000017881393,
+        "redirectStart": 0,
+        "redirectEnd": 0,
+        "fetchStart": 15.400000005960464,
+        "domainLookupStart": 15.400000005960464,
+        "domainLookupEnd": 15.400000005960464,
+        "connectStart": 15.400000005960464,
+        "secureConnectionStart": 15.400000005960464,
+        "connectEnd": 15.400000005960464,
+        "requestStart": 17.400000005960464,
+        "responseStart": 17.599999994039536,
+        "firstInterimResponseStart": 17.599999994039536,
+        "finalResponseHeadersStart": 0,
+        "responseEnd": 19,
+        "transferSize": 0,
+        "encodedBodySize": 1425,
+        "decodedBodySize": 5776,
+        "responseStatus": 200,
+        "serverTiming": [],
+        "unloadEventStart": 0,
+        "unloadEventEnd": 0,
+        "domInteractive": 0,
+        "domContentLoadedEventStart": 0,
+        "domContentLoadedEventEnd": 0,
+        "domComplete": 0,
+        "loadEventStart": 0,
+        "loadEventEnd": 0,
+        "type": "navigate",
+        "redirectCount": 0,
+        "activationStart": 0,
+        "criticalCHRestart": 0,
+        "notRestoredReasons": null
+      },
+      "loadStart": 0,
+      "loadEnd": 0,
+      "totalLoad": 0,
+      "userSessionID": "sess_zh6bhsbnb",
+      "id": 2
+    }
+  ],
+  "activity": [
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "pageEnter",
+      "timestamp": 1756699722338,
+      "pageEnterTime": "2025-09-01T04:08:42.338Z",
+      "id": 1
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "mousemove",
+      "timestamp": 1756699722944,
+      "xMove": 449,
+      "yMove": 0,
       "id": 2
     },
     {
-      "type": "Performance",
-      "data": {
-        "timeObject": {
-          "name": "https://satvikammula.site/",
-          "entryType": "navigation",
-          "startTime": 0,
-          "duration": 0,
-          "initiatorType": "navigation",
-          "deliveryType": "cache",
-          "nextHopProtocol": "http/1.1",
-          "renderBlockingStatus": "non-blocking",
-          "workerStart": 5.899999976158142,
-          "redirectStart": 0,
-          "redirectEnd": 0,
-          "fetchStart": 6.199999928474426,
-          "domainLookupStart": 6.199999928474426,
-          "domainLookupEnd": 6.199999928474426,
-          "connectStart": 6.199999928474426,
-          "secureConnectionStart": 6.199999928474426,
-          "connectEnd": 6.199999928474426,
-          "requestStart": 9.899999976158142,
-          "responseStart": 10.199999928474426,
-          "firstInterimResponseStart": 10.199999928474426,
-          "finalResponseHeadersStart": 0,
-          "responseEnd": 11,
-          "transferSize": 0,
-          "encodedBodySize": 1423,
-          "decodedBodySize": 5777,
-          "responseStatus": 200,
-          "serverTiming": [],
-          "unloadEventStart": 0,
-          "unloadEventEnd": 0,
-          "domInteractive": 0,
-          "domContentLoadedEventStart": 0,
-          "domContentLoadedEventEnd": 0,
-          "domComplete": 0,
-          "loadEventStart": 0,
-          "loadEventEnd": 0,
-          "type": "navigate",
-          "redirectCount": 0,
-          "activationStart": 0,
-          "criticalCHRestart": 0,
-          "notRestoredReasons": null
-        },
-        "loadStart": 0,
-        "loadEnd": 0,
-        "totalLoad": 0,
-        "userSessionID": "sess_zh6bhsbnb"
-      },
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723348,
+      "xScroll": 0,
+      "yScroll": 7.199999809265137,
       "id": 3
     },
     {
-      "type": "Performance",
-      "data": {
-        "timeObject": {
-          "name": "https://satvikammula.site/",
-          "entryType": "navigation",
-          "startTime": 0,
-          "duration": 0,
-          "initiatorType": "navigation",
-          "deliveryType": "cache",
-          "nextHopProtocol": "http/1.1",
-          "renderBlockingStatus": "non-blocking",
-          "workerStart": 9.5,
-          "redirectStart": 0,
-          "redirectEnd": 0,
-          "fetchStart": 9.699999928474426,
-          "domainLookupStart": 9.699999928474426,
-          "domainLookupEnd": 9.699999928474426,
-          "connectStart": 9.699999928474426,
-          "secureConnectionStart": 9.699999928474426,
-          "connectEnd": 9.699999928474426,
-          "requestStart": 13.099999904632568,
-          "responseStart": 13.5,
-          "firstInterimResponseStart": 13.5,
-          "finalResponseHeadersStart": 0,
-          "responseEnd": 15.299999952316284,
-          "transferSize": 0,
-          "encodedBodySize": 1423,
-          "decodedBodySize": 5777,
-          "responseStatus": 200,
-          "serverTiming": [],
-          "unloadEventStart": 0,
-          "unloadEventEnd": 0,
-          "domInteractive": 0,
-          "domContentLoadedEventStart": 0,
-          "domContentLoadedEventEnd": 0,
-          "domComplete": 0,
-          "loadEventStart": 0,
-          "loadEventEnd": 0,
-          "type": "navigate",
-          "redirectCount": 0,
-          "activationStart": 0,
-          "criticalCHRestart": 0,
-          "notRestoredReasons": null
-        },
-        "loadStart": 0,
-        "loadEnd": 0,
-        "totalLoad": 0,
-        "userSessionID": "sess_zh6bhsbnb"
-      },
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723359,
+      "xScroll": 0,
+      "yScroll": 17.200000762939453,
       "id": 4
     },
     {
-      "type": "Static",
-      "data": {
-        "userAgentString": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
-        "userLanguage": "en-US",
-        "userAcceptsCookies": true,
-        "userAllowsJS": true,
-        "userAllowsImages": true,
-        "userAllowsCSS": false,
-        "userScreenHeight": 864,
-        "userScreenWidth": 1383,
-        "userWindowHeight": 691,
-        "userWindowWidth": 700,
-        "userNetworkConnection": "4g",
-        "userSessionID": "sess_zh6bhsbnb"
-      },
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723376,
+      "xScroll": 0,
+      "yScroll": 24,
       "id": 5
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageEnter",
-          "timestamp": 1756524940877,
-          "pageEnterTime": "2025-08-30T03:35:40.877Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524941799,
-          "key": "Control"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524941958,
-          "key": "Shift"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524942151,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keyup",
-          "timestamp": 1756524942229,
-          "key": "I"
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723393,
+      "xScroll": 0,
+      "yScroll": 32,
       "id": 6
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageEnter",
-          "timestamp": 1756524950580,
-          "pageEnterTime": "2025-08-30T03:35:50.580Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524951744,
-          "key": "Control"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524951899,
-          "key": "Shift"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524952162,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keyup",
-          "timestamp": 1756524952236,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756524959180,
-          "idleBreakStart": "2025-08-30T03:35:54.171Z",
-          "idleBreakEnd": "2025-08-30T03:35:59.180Z",
-          "idleDuration": 5009
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "mousemove",
-          "timestamp": 1756524959180,
-          "xMove": 145,
-          "yMove": 338
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959644,
-          "xScroll": 0,
-          "yScroll": 29.200000762939453
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959656,
-          "xScroll": 0,
-          "yScroll": 52
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959671,
-          "xScroll": 0,
-          "yScroll": 72
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959688,
-          "xScroll": 0,
-          "yScroll": 109.19999694824219
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959705,
-          "xScroll": 0,
-          "yScroll": 141.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959722,
-          "xScroll": 0,
-          "yScroll": 175.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959738,
-          "xScroll": 0,
-          "yScroll": 215.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959756,
-          "xScroll": 0,
-          "yScroll": 232
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959792,
-          "xScroll": 0,
-          "yScroll": 252
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959808,
-          "xScroll": 0,
-          "yScroll": 264
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959824,
-          "xScroll": 0,
-          "yScroll": 273.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959841,
-          "xScroll": 0,
-          "yScroll": 281.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959857,
-          "xScroll": 0,
-          "yScroll": 288
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959874,
-          "xScroll": 0,
-          "yScroll": 294
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959891,
-          "xScroll": 0,
-          "yScroll": 299.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959910,
-          "xScroll": 0,
-          "yScroll": 304
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959925,
-          "xScroll": 0,
-          "yScroll": 308
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959954,
-          "xScroll": 0,
-          "yScroll": 313.20001220703125
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723409,
+      "xScroll": 0,
+      "yScroll": 48,
       "id": 7
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageEnter",
-          "timestamp": 1756524950580,
-          "pageEnterTime": "2025-08-30T03:35:50.580Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524951744,
-          "key": "Control"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524951899,
-          "key": "Shift"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524952162,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keyup",
-          "timestamp": 1756524952236,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756524959180,
-          "idleBreakStart": "2025-08-30T03:35:54.171Z",
-          "idleBreakEnd": "2025-08-30T03:35:59.180Z",
-          "idleDuration": 5009
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "mousemove",
-          "timestamp": 1756524959180,
-          "xMove": 145,
-          "yMove": 338
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959644,
-          "xScroll": 0,
-          "yScroll": 29.200000762939453
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959656,
-          "xScroll": 0,
-          "yScroll": 52
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959671,
-          "xScroll": 0,
-          "yScroll": 72
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959688,
-          "xScroll": 0,
-          "yScroll": 109.19999694824219
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959705,
-          "xScroll": 0,
-          "yScroll": 141.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959722,
-          "xScroll": 0,
-          "yScroll": 175.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959738,
-          "xScroll": 0,
-          "yScroll": 215.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959756,
-          "xScroll": 0,
-          "yScroll": 232
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959792,
-          "xScroll": 0,
-          "yScroll": 252
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959808,
-          "xScroll": 0,
-          "yScroll": 264
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959824,
-          "xScroll": 0,
-          "yScroll": 273.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959841,
-          "xScroll": 0,
-          "yScroll": 281.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959857,
-          "xScroll": 0,
-          "yScroll": 288
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959874,
-          "xScroll": 0,
-          "yScroll": 294
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959891,
-          "xScroll": 0,
-          "yScroll": 299.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959910,
-          "xScroll": 0,
-          "yScroll": 304
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959925,
-          "xScroll": 0,
-          "yScroll": 308
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959954,
-          "xScroll": 0,
-          "yScroll": 313.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959971,
-          "xScroll": 0,
-          "yScroll": 316
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723426,
+      "xScroll": 0,
+      "yScroll": 60,
       "id": 8
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageEnter",
-          "timestamp": 1756524950580,
-          "pageEnterTime": "2025-08-30T03:35:50.580Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524951744,
-          "key": "Control"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524951899,
-          "key": "Shift"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756524952162,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keyup",
-          "timestamp": 1756524952236,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756524959180,
-          "idleBreakStart": "2025-08-30T03:35:54.171Z",
-          "idleBreakEnd": "2025-08-30T03:35:59.180Z",
-          "idleDuration": 5009
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "mousemove",
-          "timestamp": 1756524959180,
-          "xMove": 145,
-          "yMove": 338
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959644,
-          "xScroll": 0,
-          "yScroll": 29.200000762939453
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959656,
-          "xScroll": 0,
-          "yScroll": 52
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959671,
-          "xScroll": 0,
-          "yScroll": 72
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959688,
-          "xScroll": 0,
-          "yScroll": 109.19999694824219
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959705,
-          "xScroll": 0,
-          "yScroll": 141.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959722,
-          "xScroll": 0,
-          "yScroll": 175.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959738,
-          "xScroll": 0,
-          "yScroll": 215.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959756,
-          "xScroll": 0,
-          "yScroll": 232
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959792,
-          "xScroll": 0,
-          "yScroll": 252
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959808,
-          "xScroll": 0,
-          "yScroll": 264
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959824,
-          "xScroll": 0,
-          "yScroll": 273.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959841,
-          "xScroll": 0,
-          "yScroll": 281.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959857,
-          "xScroll": 0,
-          "yScroll": 288
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959874,
-          "xScroll": 0,
-          "yScroll": 294
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959891,
-          "xScroll": 0,
-          "yScroll": 299.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959910,
-          "xScroll": 0,
-          "yScroll": 304
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959925,
-          "xScroll": 0,
-          "yScroll": 308
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959954,
-          "xScroll": 0,
-          "yScroll": 313.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959971,
-          "xScroll": 0,
-          "yScroll": 316
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524959987,
-          "xScroll": 0,
-          "yScroll": 319.20001220703125
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723443,
+      "xScroll": 0,
+      "yScroll": 82,
       "id": 9
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960103,
-          "xScroll": 0,
-          "yScroll": 338
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960121,
-          "xScroll": 0,
-          "yScroll": 340
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960137,
-          "xScroll": 0,
-          "yScroll": 342
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960154,
-          "xScroll": 0,
-          "yScroll": 344
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960171,
-          "xScroll": 0,
-          "yScroll": 346
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960187,
-          "xScroll": 0,
-          "yScroll": 348
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960204,
-          "xScroll": 0,
-          "yScroll": 350
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960290,
-          "xScroll": 0,
-          "yScroll": 377.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960305,
-          "xScroll": 0,
-          "yScroll": 398
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960322,
-          "xScroll": 0,
-          "yScroll": 407.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960338,
-          "xScroll": 0,
-          "yScroll": 414
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960388,
-          "xScroll": 0,
-          "yScroll": 427.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960404,
-          "xScroll": 0,
-          "yScroll": 433.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960421,
-          "xScroll": 0,
-          "yScroll": 435.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960439,
-          "xScroll": 0,
-          "yScroll": 437.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960456,
-          "xScroll": 0,
-          "yScroll": 438
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960489,
-          "xScroll": 0,
-          "yScroll": 439.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960623,
-          "xScroll": 0,
-          "yScroll": 440
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756524963593,
-          "idleBreakStart": "2025-08-30T03:36:02.632Z",
-          "idleBreakEnd": "2025-08-30T03:36:03.593Z",
-          "idleDuration": 961
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963593,
-          "xScroll": 0,
-          "yScroll": 432
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963605,
-          "xScroll": 0,
-          "yScroll": 414
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963621,
-          "xScroll": 0,
-          "yScroll": 405.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963640,
-          "xScroll": 0,
-          "yScroll": 396
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963654,
-          "xScroll": 0,
-          "yScroll": 384
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963671,
-          "xScroll": 0,
-          "yScroll": 378
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723460,
+      "xScroll": 0,
+      "yScroll": 99.19999694824219,
       "id": 10
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960103,
-          "xScroll": 0,
-          "yScroll": 338
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960121,
-          "xScroll": 0,
-          "yScroll": 340
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960137,
-          "xScroll": 0,
-          "yScroll": 342
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960154,
-          "xScroll": 0,
-          "yScroll": 344
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960171,
-          "xScroll": 0,
-          "yScroll": 346
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960187,
-          "xScroll": 0,
-          "yScroll": 348
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960204,
-          "xScroll": 0,
-          "yScroll": 350
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960290,
-          "xScroll": 0,
-          "yScroll": 377.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960305,
-          "xScroll": 0,
-          "yScroll": 398
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960322,
-          "xScroll": 0,
-          "yScroll": 407.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960338,
-          "xScroll": 0,
-          "yScroll": 414
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960388,
-          "xScroll": 0,
-          "yScroll": 427.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960404,
-          "xScroll": 0,
-          "yScroll": 433.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960421,
-          "xScroll": 0,
-          "yScroll": 435.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960439,
-          "xScroll": 0,
-          "yScroll": 437.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960456,
-          "xScroll": 0,
-          "yScroll": 438
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960489,
-          "xScroll": 0,
-          "yScroll": 439.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524960623,
-          "xScroll": 0,
-          "yScroll": 440
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756524963593,
-          "idleBreakStart": "2025-08-30T03:36:02.632Z",
-          "idleBreakEnd": "2025-08-30T03:36:03.593Z",
-          "idleDuration": 961
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963593,
-          "xScroll": 0,
-          "yScroll": 432
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963605,
-          "xScroll": 0,
-          "yScroll": 414
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963621,
-          "xScroll": 0,
-          "yScroll": 405.20001220703125
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963640,
-          "xScroll": 0,
-          "yScroll": 396
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963654,
-          "xScroll": 0,
-          "yScroll": 384
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963671,
-          "xScroll": 0,
-          "yScroll": 378
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524963689,
-          "xScroll": 0,
-          "yScroll": 372
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723476,
+      "xScroll": 0,
+      "yScroll": 116,
       "id": 11
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756524988210,
-          "idleBreakStart": "2025-08-30T03:36:05.789Z",
-          "idleBreakEnd": "2025-08-30T03:36:28.210Z",
-          "idleDuration": 22421
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageLeave",
-          "timestamp": 1756524988210,
-          "pageLeaveTime": "2025-08-30T03:36:28.210Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "onPage",
-          "timestamp": 1756524988210,
-          "onPage": "https://satvikammula.site/"
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723493,
+      "xScroll": 0,
+      "yScroll": 142,
       "id": 12
     },
     {
-      "type": "Performance",
-      "data": {
-        "timeObject": {
-          "name": "https://satvikammula.site/",
-          "entryType": "navigation",
-          "startTime": 0,
-          "duration": 0,
-          "initiatorType": "navigation",
-          "deliveryType": "cache",
-          "nextHopProtocol": "http/1.1",
-          "renderBlockingStatus": "non-blocking",
-          "workerStart": 9.5,
-          "redirectStart": 0,
-          "redirectEnd": 0,
-          "fetchStart": 9.699999928474426,
-          "domainLookupStart": 9.699999928474426,
-          "domainLookupEnd": 9.699999928474426,
-          "connectStart": 9.699999928474426,
-          "secureConnectionStart": 9.699999928474426,
-          "connectEnd": 9.699999928474426,
-          "requestStart": 12.899999976158142,
-          "responseStart": 13.199999928474426,
-          "firstInterimResponseStart": 13.199999928474426,
-          "finalResponseHeadersStart": 0,
-          "responseEnd": 15.199999928474426,
-          "transferSize": 0,
-          "encodedBodySize": 1423,
-          "decodedBodySize": 5777,
-          "responseStatus": 200,
-          "serverTiming": [],
-          "unloadEventStart": 0,
-          "unloadEventEnd": 0,
-          "domInteractive": 0,
-          "domContentLoadedEventStart": 0,
-          "domContentLoadedEventEnd": 0,
-          "domComplete": 0,
-          "loadEventStart": 0,
-          "loadEventEnd": 0,
-          "type": "navigate",
-          "redirectCount": 0,
-          "activationStart": 0,
-          "criticalCHRestart": 0,
-          "notRestoredReasons": null
-        },
-        "loadStart": 0,
-        "loadEnd": 0,
-        "totalLoad": 0,
-        "userSessionID": "sess_zh6bhsbnb"
-      },
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723510,
+      "xScroll": 0,
+      "yScroll": 154,
       "id": 13
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageEnter",
-          "timestamp": 1756524988275,
-          "pageEnterTime": "2025-08-30T03:36:28.275Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756524988414,
-          "xScroll": 0,
-          "yScroll": 362
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723526,
+      "xScroll": 0,
+      "yScroll": 164,
       "id": 14
     },
     {
-      "type": "Performance",
-      "data": {
-        "timeObject": {
-          "name": "https://satvikammula.site/",
-          "entryType": "navigation",
-          "startTime": 0,
-          "duration": 0,
-          "initiatorType": "navigation",
-          "deliveryType": "cache",
-          "nextHopProtocol": "http/1.1",
-          "renderBlockingStatus": "non-blocking",
-          "workerStart": 9.399999976158142,
-          "redirectStart": 0,
-          "redirectEnd": 0,
-          "fetchStart": 9.600000023841858,
-          "domainLookupStart": 9.600000023841858,
-          "domainLookupEnd": 9.600000023841858,
-          "connectStart": 9.600000023841858,
-          "secureConnectionStart": 9.600000023841858,
-          "connectEnd": 9.600000023841858,
-          "requestStart": 12.799999952316284,
-          "responseStart": 13,
-          "firstInterimResponseStart": 13,
-          "finalResponseHeadersStart": 0,
-          "responseEnd": 15.699999928474426,
-          "transferSize": 0,
-          "encodedBodySize": 1423,
-          "decodedBodySize": 5777,
-          "responseStatus": 200,
-          "serverTiming": [],
-          "unloadEventStart": 0,
-          "unloadEventEnd": 0,
-          "domInteractive": 0,
-          "domContentLoadedEventStart": 0,
-          "domContentLoadedEventEnd": 0,
-          "domComplete": 0,
-          "loadEventStart": 0,
-          "loadEventEnd": 0,
-          "type": "navigate",
-          "redirectCount": 0,
-          "activationStart": 0,
-          "criticalCHRestart": 0,
-          "notRestoredReasons": null
-        },
-        "loadStart": 0,
-        "loadEnd": 0,
-        "totalLoad": 0,
-        "userSessionID": "sess_zh6bhsbnb"
-      },
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723543,
+      "xScroll": 0,
+      "yScroll": 176,
       "id": 15
     },
     {
-      "type": "Static",
-      "data": {
-        "userAgentString": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36",
-        "userLanguage": "en-US",
-        "userAcceptsCookies": true,
-        "userAllowsJS": true,
-        "userAllowsImages": true,
-        "userAllowsCSS": false,
-        "userScreenHeight": 864,
-        "userScreenWidth": 1383,
-        "userWindowHeight": 691,
-        "userWindowWidth": 700,
-        "userNetworkConnection": "4g",
-        "userSessionID": "sess_zh6bhsbnb"
-      },
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723560,
+      "xScroll": 0,
+      "yScroll": 184,
       "id": 16
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageEnter",
-          "timestamp": 1756524999686,
-          "pageEnterTime": "2025-08-30T03:36:39.686Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756525000467,
-          "key": "Control"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756525000614,
-          "key": "Shift"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756525000805,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keyup",
-          "timestamp": 1756525000880,
-          "key": "I"
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723577,
+      "xScroll": 0,
+      "yScroll": 191.1999969482422,
       "id": 17
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756525016285,
-          "idleBreakStart": "2025-08-30T03:35:44.155Z",
-          "idleBreakEnd": "2025-08-30T03:36:56.285Z",
-          "idleDuration": 72130
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageLeave",
-          "timestamp": 1756525016285,
-          "pageLeaveTime": "2025-08-30T03:36:56.285Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "onPage",
-          "timestamp": 1756525016285,
-          "onPage": "https://satvikammula.site/"
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723593,
+      "xScroll": 0,
+      "yScroll": 200,
       "id": 18
     },
     {
-      "type": "Activity",
-      "data": [
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "pageEnter",
-          "timestamp": 1756525007325,
-          "pageEnterTime": "2025-08-30T03:36:47.325Z"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756525007882,
-          "key": "Control"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756525008041,
-          "key": "Shift"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keydown",
-          "timestamp": 1756525008219,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "keyup",
-          "timestamp": 1756525008294,
-          "key": "I"
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "idleBreak",
-          "timestamp": 1756525018513,
-          "idleBreakStart": "2025-08-30T03:36:50.220Z",
-          "idleBreakEnd": "2025-08-30T03:36:58.513Z",
-          "idleDuration": 8293
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "mousemove",
-          "timestamp": 1756525018513,
-          "xMove": 678,
-          "yMove": 17
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019169,
-          "xScroll": 0,
-          "yScroll": 6
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019181,
-          "xScroll": 0,
-          "yScroll": 35.20000076293945
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019197,
-          "xScroll": 0,
-          "yScroll": 53.20000076293945
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019215,
-          "xScroll": 0,
-          "yScroll": 67.19999694824219
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019230,
-          "xScroll": 0,
-          "yScroll": 84
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019248,
-          "xScroll": 0,
-          "yScroll": 100
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019265,
-          "xScroll": 0,
-          "yScroll": 117.19999694824219
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019281,
-          "xScroll": 0,
-          "yScroll": 143.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019298,
-          "xScroll": 0,
-          "yScroll": 155.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019314,
-          "xScroll": 0,
-          "yScroll": 163.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019332,
-          "xScroll": 0,
-          "yScroll": 170
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019348,
-          "xScroll": 0,
-          "yScroll": 173.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019366,
-          "xScroll": 0,
-          "yScroll": 174
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019381,
-          "xScroll": 0,
-          "yScroll": 176
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "scroll",
-          "timestamp": 1756525019432,
-          "xScroll": 0,
-          "yScroll": 177.1999969482422
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "mousemove",
-          "timestamp": 1756525019593,
-          "xMove": 454,
-          "yMove": 307
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "mousemove",
-          "timestamp": 1756525020163,
-          "xMove": 370,
-          "yMove": 286
-        },
-        {
-          "sessionID": "sess_zh6bhsbnb",
-          "userAction": "mousemove",
-          "timestamp": 1756525020941,
-          "xMove": 404,
-          "yMove": 309
-        }
-      ],
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723612,
+      "xScroll": 0,
+      "yScroll": 202,
       "id": 19
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699723628,
+      "xScroll": 0,
+      "yScroll": 203.1999969482422,
+      "id": 20
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "mousemove",
+      "timestamp": 1756699723824,
+      "xMove": 392,
+      "yMove": 180,
+      "id": 21
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "click",
+      "timestamp": 1756699724307,
+      "xClick": 223,
+      "yClick": 173,
+      "button": 0,
+      "id": 22
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "mousemove",
+      "timestamp": 1756699724455,
+      "xMove": 230,
+      "yMove": 173,
+      "id": 23
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "click",
+      "timestamp": 1756699724867,
+      "xClick": 361,
+      "yClick": 207,
+      "button": 0,
+      "id": 24
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "mousemove",
+      "timestamp": 1756699725002,
+      "xMove": 374,
+      "yMove": 200,
+      "id": 25
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "click",
+      "timestamp": 1756699725362,
+      "xClick": 484,
+      "yClick": 106,
+      "button": 0,
+      "id": 26
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "mousemove",
+      "timestamp": 1756699725515,
+      "xMove": 474,
+      "yMove": 86,
+      "id": 27
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "idleBreak",
+      "timestamp": 1756699730598,
+      "idleBreakStart": "2025-09-01T04:08:47.561Z",
+      "idleBreakEnd": "2025-09-01T04:08:50.598Z",
+      "idleDuration": 3037,
+      "id": 28
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "mousemove",
+      "timestamp": 1756699730598,
+      "xMove": 375,
+      "yMove": 5,
+      "id": 29
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699730963,
+      "xScroll": 0,
+      "yScroll": 202,
+      "id": 30
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699730975,
+      "xScroll": 0,
+      "yScroll": 154,
+      "id": 31
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699730992,
+      "xScroll": 0,
+      "yScroll": 98,
+      "id": 32
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699731009,
+      "xScroll": 0,
+      "yScroll": 70,
+      "id": 33
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699731027,
+      "xScroll": 0,
+      "yScroll": 48,
+      "id": 34
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699731042,
+      "xScroll": 0,
+      "yScroll": 28,
+      "id": 35
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699731058,
+      "xScroll": 0,
+      "yScroll": 17.200000762939453,
+      "id": 36
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699731076,
+      "xScroll": 0,
+      "yScroll": 7.199999809265137,
+      "id": 37
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "scroll",
+      "timestamp": 1756699731092,
+      "xScroll": 0,
+      "yScroll": 0,
+      "id": 38
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "mousemove",
+      "timestamp": 1756699731758,
+      "xMove": 340,
+      "yMove": 228,
+      "id": 39
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "mousemove",
+      "timestamp": 1756699732275,
+      "xMove": 424,
+      "yMove": 195,
+      "id": 40
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "click",
+      "timestamp": 1756699732494,
+      "xClick": 423,
+      "yClick": 193,
+      "button": 0,
+      "id": 41
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "idleBreak",
+      "timestamp": 1756699741382,
+      "idleBreakStart": "2025-09-01T04:08:55.607Z",
+      "idleBreakEnd": "2025-09-01T04:09:01.382Z",
+      "idleDuration": 5775,
+      "id": 42
+    },
+    {
+      "sessionID": "sess_zh6bhsbnb",
+      "userAction": "pageLeave",
+      "timestamp": 1756699741382,
+      "pageLeaveTime": "2025-09-01T04:09:01.382Z",
+      "id": 43
     }
   ]
 }
