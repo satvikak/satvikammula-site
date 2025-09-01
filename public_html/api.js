@@ -1,225 +1,262 @@
 const express = require("express");
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser")
+const {MongoClient, ObjectId} = require("mongodb");
 const app = express();
 const port = 3001;
-const fs = require("fs");
-const path = require("path")
-const DB_PATH = path.join(__dirname, "db.json");
+app.use(express.json());
+// app.use(bodyParser.json());
 
-app.use(bodyParser.json())
+const mongoConnectURI = "mongodb://satvi:mongoMangodbMilkshake@127.0.0.1:27017/cse135?authSource=cse135";
+const myDB = "cse135";
 
-let staticData = []
-let performanceData = [];
-let activityData = [];
+let db, myStaticData, myPerformanceData, myActivityData;
 
-let dbBackup = {}
+MongoClient.connect(mongoConnectURI).then(client => {
+    db = client.db(myDB);
+    myStaticData = db.collection("static");
+    myPerformanceData = db.collection("performance");
+    myActivityData = db.collection("activity");
+    app.listen(port, () => {
+        console.log(`MongoDB API server running on http://localhost:${port}`);
+    });
+}).catch(error => console.error("Mongo connection error:", error));
 
-const loadDB = () => {
-  if (fs.existsSync(DB_PATH)) {
-    const rawData = fs.readFileSync(DB_PATH, "utf-8");
-    const db = JSON.parse(rawData);
-
-    // Save everything except your managed tables
-    dbBackup = { ...db };
-    delete dbBackup.static;
-    delete dbBackup.performance;
-    delete dbBackup.activity; // <- make sure this line is here
-
-    staticData = db.static || [];
-    performanceData = db.performance || [];
-    activityData = db.activity || [];
-  }
+const idParseHelper = (id) => {
+    try {
+        return new ObjectId(id);
+    }
+    catch {
+        return null;
+    }
 };
 
-const saveDB = () => {
-  const dbToSave = {
-    ...dbBackup,        // only posts, comments, logs, profile, etc.
-    static: staticData,
-    performance: performanceData,
-    activity: activityData
-  };
-  fs.writeFileSync(DB_PATH, JSON.stringify(dbToSave, null, 2));
-};
+app.get("/api/static", async (request, response) => {
+    try {
+        const staticData = await myStaticData.find().toArray();
+        response.json(staticData);
+    } 
+    catch (error) {
+        console.error("Error fetching static item:", error);
+        response.status(500).json({ error: "Failed to fetch static item" });
+    }
+});
 
-loadDB();
-
-const findMyItem = (table, id) => table.find(item => String(item.id) === String(id));
-
-const getNextId = (table) => {
-  if (!table.length) return 1; // start at 1
-  return Math.max(...table.map(item => Number(item.id))) + 1;
-};
-
-app.get("/api/static", (request, response) => {
-  response.json(staticData);
+app.get("/api/static/:id", async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({error: "That id doesn't exist!"});
+    }
+    try {
+        const requestedItem = await myStaticData.findOne({_id});
+        if(!requestedItem) {
+            return response.status(404).json({error: "We can't find that static item!"})
+        }
+        response.json(requestedItem);
+    }
+    catch (error) {
+        console.error("Error fetching static item:", error);
+        response.status(500).json({error: "Failed to fetch static item"})
+    }
 })
 
-app.get("/api/static/:id", (request, response) => {
-  const requestedItem = findMyItem(staticData, request.params.id);
-  if(!requestedItem) {
-      return response.status(404).json({error: "That id doesn't exist!"});
-  }
-  response.json(requestedItem);
+app.post('/api/static', async (request, response) => {
+    const {_id, ...body} = request.body;
+    if(_id) {
+        return response.status(400).json({ error: "POST requests cannot have an ID" });
+    }
+    try {
+        const myNewItem = await myStaticData.insertOne(body);
+        response.status(201).json({ _id: myNewItem.insertedId, ...body });
+    } catch (error) {
+        console.error("Error creating static item:", error);
+        response.status(500).json({ error: "Failed to create static item" });
+    }
+});
+
+app.put('/api/static/:id', async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({ error: "That id doesn't exist!" });
+    }
+    try {
+        const changeMyItem = await myStaticData.findOneAndUpdate({ _id }, { $set: request.body }, { returnDocument: "after" });
+        if (!changeMyItem.value) {
+            return response.status(404).json({ error: "We can't find that static item!" });
+        }
+        response.json(changeMyItem.value);
+    } catch (error) {
+        console.error("Error updating static item:", error);
+        response.status(500).json({ error: "Failed to update static item" });
+    }
+});
+
+app.delete('/api/static/:id', async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({ error: "That id doesn't exist!" });
+    }
+    try {
+        const deleteMyItem = await myStaticData.findOneAndDelete({ _id });
+        if (!deleteMyItem.value) {
+            return response.status(404).json({ error: "We can't find that static item!" });
+        }
+        response.json(deleteMyItem.value);
+    } catch (error) {
+        console.error("Error deleting static item:", error);
+        response.status(500).json({ error: "Failed to delete static item" });
+    }
+});
+
+app.get("/api/performance", async (request, response) => {
+    try {
+        const performanceData = await myPerformanceData.find().toArray();
+        response.json(performanceData);
+    } 
+    catch (error) {
+        console.error("Error fetching performance item:", error);
+        response.status(500).json({ error: "Failed to fetch performance item" });
+    }
+});
+
+app.get("/api/performance/:id", async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({error: "That id doesn't exist!"});
+    }
+    try {
+        const requestedItem = await myPerformanceData.findOne({_id});
+        if(!requestedItem) {
+            return response.status(404).json({error: "We can't find that performance item!"})
+        }
+        response.json(requestedItem);
+    }
+    catch (error) {
+        console.error("Error fetching performance item:", error);
+        response.status(500).json({error: "Failed to fetch performance item"})
+    }
 })
 
-app.post('/api/static', (request, response) => {
-  if ('id' in request.body) {
-      return response.status(400).json({ error: "POST requests cannot have an ID" });
-  }    
-  const myNewItem = { id: request.body.id || getNextId(staticData), ...request.body };
-  staticData.push(myNewItem);
-  saveDB();
-  response.status(201).json(myNewItem);
+app.post('/api/performance', async (request, response) => {
+    const {_id, ...body} = request.body;
+    if(_id) {
+        return response.status(400).json({ error: "POST requests cannot have an ID" });
+    }    
+    try {
+        const myNewItem = await myPerformanceData.insertOne(body);
+        response.status(201).json({ _id: myNewItem.insertedId, ...body });
+    } catch (error) {
+        console.error("Error creating performance item:", error);
+        response.status(500).json({ error: "Failed to create performance item" });
+    }
 });
 
-app.put('/api/static/:id', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "PUT requests require an ID" });
-  }    
-  const changeMyItem = staticData.findIndex(item => String(item.id) === String(request.params.id));
-  if (changeMyItem === -1){
-      return response.status(404).json({ error: "That id doesn't exist!" });
-  }
-  staticData[changeMyItem] = { ...staticData[changeMyItem], ...request.body };
-  saveDB()
-  response.json(staticData[changeMyItem]);
+app.put('/api/performance/:id', async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({ error: "That id doesn't exist!" });
+    }
+    try {
+        const changeMyItem = await myPerformanceData.findOneAndUpdate({ _id }, { $set: request.body }, { returnDocument: "after" });
+        if (!changeMyItem.value) {
+            return response.status(404).json({ error: "We can't find that performance item!" });
+        }
+        response.json(changeMyItem.value);
+    } catch (error) {
+        console.error("Error updating performance item:", error);
+        response.status(500).json({ error: "Failed to update performance item" });
+    }
 });
 
-app.put('/api/static/', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "PUT requests require an ID" });
-  }    
+app.delete('/api/performance/:id', async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({ error: "That id doesn't exist!" });
+    }
+    try {
+        const deleteMyItem = await myPerformanceData.findOneAndDelete({ _id });
+        if (!deleteMyItem.value) {
+            return response.status(404).json({ error: "We can't find that performance item!" });
+        }
+        response.json(deleteMyItem.value);
+    } catch (error) {
+        console.error("Error deleting performance item:", error);
+        response.status(500).json({ error: "Failed to delete performance item" });
+    }
 });
 
-app.delete('/api/static/:id', (request, response) => {
-  const deleteMyItem = staticData.findIndex(item => String(item.id) === String(request.params.id));
-  if (deleteMyItem === -1){
-    return response.status(404).json({ error: "That id doesn't exist!" });
-  }
-  const goneItem = staticData.splice(deleteMyItem, 1);
-  saveDB();
-  response.json(goneItem[0]);
+app.get("/api/activity", async (request, response) => {
+    try {
+        const activityData = await myActivityData.find().toArray();
+        response.json(activityData);
+    } 
+    catch (error) {
+        console.error("Error fetching activity item:", error);
+        response.status(500).json({ error: "Failed to fetch activity item" });
+    }
 });
 
-app.delete('/api/static/', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "DELETE requests require an ID" });
-  } 
+app.get("/api/activity/:id", async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({error: "That id doesn't exist!"});
+    }
+    try {
+        const requestedItem = await myActivityData.findOne({_id});
+        if(!requestedItem) {
+            return response.status(404).json({error: "We can't find that activity item!"})
+        }
+        response.json(requestedItem);
+    }
+    catch (error) {
+        console.error("Error fetching activity item:", error);
+        response.status(500).json({error: "Failed to fetch activity item"})
+    }
+})
+
+app.post('/api/activity', async (request, response) => {
+    const {_id, ...body} = request.body;
+    if(_id) {
+        return response.status(400).json({ error: "POST requests cannot have an ID" });
+    }    
+    try {
+        const myNewItem = await myActivityData.insertOne(body);
+        response.status(201).json({ _id: myNewItem.insertedId, ...body });
+    } catch (error) {
+        console.error("Error creating activity item:", error);
+        response.status(500).json({ error: "Failed to create activity item" });
+    }
 });
 
-app.get('/api/performance', (request, response) => response.json(performanceData));
-
-app.get('/api/performance/:id', (request, response) => {
-  const requestedItem = findMyItem(performanceData, request.params.id);
-  if (!requestedItem){
-      return response.status(404).json({ error: "That id doesn't exist!" });
-  } 
-  response.json(requestedItem);
+app.put('/api/activity/:id', async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({ error: "That id doesn't exist!" });
+    }
+    try {
+        const changeMyItem = await myActivityData.findOneAndUpdate({ _id }, { $set: request.body }, { returnDocument: "after" });
+        if (!changeMyItem.value) {
+            return response.status(404).json({ error: "We can't find that activity item!" });
+        }
+        response.json(changeMyItem.value);
+    } catch (error) {
+        console.error("Error updating activity item:", error);
+        response.status(500).json({ error: "Failed to update activity item" });
+    }
 });
 
-app.post('/api/performance', (request, response) => {    
-  const myNewItem = { id: request.body.id || getNextId(performanceData), ...request.body };
-  performanceData.push(myNewItem);
-  saveDB();
-  response.status(201).json(myNewItem);
-});
-
-app.put('/api/performance/:id', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "PUT requests require an ID" });
-  }      
-  const changeMyItem = performanceData.findIndex(item => String(item.id) === String(request.params.id));
-  if (changeMyItem === -1) {
-    return response.status(404).json({ error: "That id doesn't exist!" });
-  }
-  performanceData[changeMyItem] = { ...performanceData[changeMyItem], ...request.body };
-  saveDB();
-  response.json(performanceData[changeMyItem]);
-});
-
-app.put('/api/performance/', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "PUT requests require an ID" });
-  }    
-});
-
-app.delete('/api/performance/:id', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "DELETE requests require an ID" });
-  }      
-  const deleteMyItem = performanceData.findIndex(item => String(item.id) === String(request.params.id));
-  if (deleteMyItem === -1) {
-    return response.status(404).json({ error: "That id doesn't exist!" });
-  }
-  const goneItem = performanceData.splice(deleteMyItem, 1);
-  saveDB();
-  response.json(goneItem[0]);
-});
-
-app.delete('/api/performance/', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "DELETE requests require an ID" });
-  } 
-});
-
-app.get('/api/activity', (request, response) => response.json(activityData));
-
-app.get('/api/activity/:id', (request, response) => {
-  const requestedItem = findMyItem(activityData, request.params.id);
-  if (!requestedItem) {
-      return response.status(404).json({ error: "That id doesn't exist!" });
-  }
-  response.json(requestedItem);
-});
-
-app.post('/api/activity', (request, response) => {
-  if ('id' in request.body) {
-      return response.status(400).json({ error: "POST requests cannot have an ID" });
-  }        
-  const myNewItem = { id: request.body.id || getNextId(activityData), ...request.body };
-  activityData.push(myNewItem);
-  saveDB();
-  response.status(201).json(myNewItem);
-});
-
-app.put('/api/activity/:id', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "PUT requests require an ID" });
-  }        
-  const changeMyItem = activityData.findIndex(item => String(item.id) === String(request.params.id));
-  if (changeMyItem === -1) {
-      return response.status(404).json({ error: "That id doesn't exist!" });
-  }
-  activityData[changeMyItem] = { ...activityData[changeMyItem], ...request.body };
-  saveDB();
-  response.json(activityData[changeMyItem]);
-});
-
-app.put('/api/activity/', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "PUT requests require an ID" });
-  }    
-});
-
-app.delete('/api/activity/:id', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "DELETE requests require an ID" });
-  }     
-  const deleteMyItem = activityData.findIndex(item => String(item.id) === String(request.params.id));
-  if (deleteMyItem === -1) {
-      return response.status(404).json({ error: "That id doesn't exist!" });
-  }
-  const goneItem = activityData.splice(deleteMyItem, 1);
-  saveDB();
-  response.json(goneItem[0]);
-});
-
-app.delete('/api/activity/', (request, response) => {
-  if (!request.params.id) {
-      return response.status(400).json({ error: "DELETE requests require an ID" });
-  } 
-});
-
-app.listen(port, () => {
-  console.log(`API server running on http://localhost:${port}`);
+app.delete('/api/activity/:id', async (request, response) => {
+    const _id = idParseHelper(request.params.id);
+    if(!_id) {
+        return response.status(404).json({ error: "That id doesn't exist!" });
+    }
+    try {
+        const deleteMyItem = await myActivityData.findOneAndDelete({ _id });
+        if (!deleteMyItem.value) {
+            return response.status(404).json({ error: "We can't find that activity item!" });
+        }
+        response.json(deleteMyItem.value);
+    } catch (error) {
+        console.error("Error deleting activity item:", error);
+        response.status(500).json({ error: "Failed to delete activity item" });
+    }
 });
