@@ -1,0 +1,127 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Database Viewer</title>
+    <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles.css" />
+    <style>
+      section { margin-bottom: 32px; }
+      
+      body {
+        background-color: green;
+        color: white;
+        margin: 0;
+        padding: 0;
+        font-family: 'Comfortaa', sans-serif;
+      }
+
+      h1.mainTitle {
+        background-color: #db5079;
+        padding: 1.5rem;
+        text-align: center;
+        color: white; 
+      }
+
+      zing-grid {
+        height: 400px;
+        overflow: auto;
+        margin-bottom: 32px;
+      }
+
+      zing-grid {
+        font-family: 'Comfortaa', sans-serif; 
+      }
+
+      zing-grid zg-caption {
+        background-color: #fc8eac;  /* Dark pink */
+        color: white;
+        padding: 1rem; 
+        font-weight: bold;
+        text-align: center;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <h1 class="mainTitle">Database</h1>   
+  <!-- Static Data Grid -->
+    <zing-grid id="static-data" pager page-size="10" page-size-options="5, 10, 15, 20" src="/api/static?limit=500">
+        <zg-caption>Static Data</zg-caption>
+        <zg-colgroup>
+            <!-- Custom Column Headers -->
+            <zg-column header="ID" index="_id" type="text"></zg-column>
+            <zg-column header="Session ID" index="userSessionID" type="text"></zg-column>
+            <zg-column header="User Agent" index="userAgentString" type="text"></zg-column>
+            <zg-column header="User Language" index="userLanguage" type="text"></zg-column>
+            <zg-column header="Accepts Cookies" index="userAcceptsCookies" type="text"></zg-column>
+            <zg-column header="Allows Javascript" index="userAllowsJS" type="text"></zg-column>
+            <zg-column header="Allows Images" index="userAllowsImages" type="text"></zg-column>
+            <zg-column header="Allows CSS" index="userAllowsCSS" type="text"></zg-column>
+            <zg-column header="Screen Height" index="userScreenHeight" type="text"></zg-column>
+            <zg-column header="Screen Width" index="userScreenWidth" type="text"></zg-column>
+            <zg-column header="Window Height" index="userWindowHeight" type="text"></zg-column>
+            <zg-column header="Window Width" index="userWindowWidth" type="text"></zg-column>
+            <zg-column header="Network Connection" index="userNetworkConnection" type="text"></zg-column>
+        </zg-colgroup>
+    </zing-grid>
+
+    <zing-grid id="performance-data" pager page-size="10" page-size-options="5, 10, 15, 20" src="/api/performance?limit=500">
+      <zg-caption>Performance Data</zg-caption>
+      
+      <!-- Column Group with Explicit Column Names -->
+      <zg-colgroup>
+        <!-- Session and Load Columns -->
+        <zg-column header="ID" index="_id" type="text"></zg-column>
+        <zg-column header="Session ID" index="userSessionID" type="text"></zg-column>
+        <zg-column header="Load Start" index="loadStart" type="number"></zg-column>
+        <zg-column header="Load End" index="loadEnd" type="number"></zg-column>
+        <zg-column header="Total Load" index="totalLoad" type="number"></zg-column>
+
+        <!-- Time Object Columns -->
+        <zg-column header="URL" index="timeObject.name" type="text"></zg-column>
+        <zg-column header="Entry Type" index="timeObject.entryType" type="text"></zg-column>
+        <zg-column header="Start Time" index="timeObject.startTime" type="number"></zg-column>
+        <zg-column header="Duration" index="timeObject.duration" type="number"></zg-column>
+        <zg-column header="Initiator Type" index="timeObject.initiatorType" type="text"></zg-column>
+        <zg-column header="Delivery Type" index="timeObject.deliveryType" type="text"></zg-column>
+        <zg-column header="Next Hop Protocol" index="timeObject.nextHopProtocol" type="text"></zg-column>
+        <zg-column header="Render Blocking Status" index="timeObject.renderBlockingStatus" type="text"></zg-column>
+        <zg-column header="Worker Start" index="timeObject.workerStart" type="number"></zg-column>
+        <zg-column header="Redirect Start" index="timeObject.redirectStart" type="number"></zg-column>
+        <zg-column header="Redirect End" index="timeObject.redirectEnd" type="number"></zg-column>
+        <zg-column header="Fetch Start" index="timeObject.fetchStart" type="number"></zg-column>
+        <zg-column header="Domain Lookup Start" index="timeObject.domainLookupStart" type="number"></zg-column>
+        <zg-column header="Domain Lookup End" index="timeObject.domainLookupEnd" type="number"></zg-column>
+        <zg-column header="Connect Start" index="timeObject.connectStart" type="number"></zg-column>
+        <zg-column header="Secure Connection Start" index="timeObject.secureConnectionStart" type="number"></zg-column>
+        <zg-column header="Connect End" index="timeObject.connectEnd" type="number"></zg-column>
+        <zg-column header="Request Start" index="timeObject.requestStart" type="number"></zg-column>
+        <zg-column header="Response Start" index="timeObject.responseStart" type="number"></zg-column>
+        <zg-column header="Response End" index="timeObject.responseEnd" type="number"></zg-column>
+        <zg-column header="Transfer Size" index="timeObject.transferSize" type="number"></zg-column>
+        <zg-column header="Encoded Body Size" index="timeObject.encodedBodySize" type="number"></zg-column>
+        <zg-column header="Decoded Body Size" index="timeObject.decodedBodySize" type="number"></zg-column>
+        <zg-column header="Response Status" index="timeObject.responseStatus" type="number"></zg-column>
+        <zg-column header="Unload Event Start" index="timeObject.unloadEventStart" type="number"></zg-column>
+        <zg-column header="Unload Event End" index="timeObject.unloadEventEnd" type="number"></zg-column>
+        <zg-column header="DOM Interactive" index="timeObject.domInteractive" type="number"></zg-column>
+        <zg-column header="DOM Content Loaded Start" index="timeObject.domContentLoadedEventStart" type="number"></zg-column>
+        <zg-column header="DOM Content Loaded End" index="timeObject.domContentLoadedEventEnd" type="number"></zg-column>
+        <zg-column header="DOM Complete" index="timeObject.domComplete" type="number"></zg-column>
+        <zg-column header="Load Event Start" index="timeObject.loadEventStart" type="number"></zg-column>
+        <zg-column header="Load Event End" index="timeObject.loadEventEnd" type="number"></zg-column>
+        <zg-column header="Type" index="timeObject.type" type="text"></zg-column>
+        <zg-column header="Redirect Count" index="timeObject.redirectCount" type="number"></zg-column>
+        <zg-column header="Activation Start" index="timeObject.activationStart" type="number"></zg-column>
+        <zg-column header="Critical CH Restart" index="timeObject.criticalCHRestart" type="number"></zg-column>
+        <zg-column header="Not Restored Reasons" index="timeObject.notRestoredReasons" type="text"></zg-column>
+      </zg-colgroup>
+      
+    </zing-grid>
+    
+    <zing-grid caption="Activity Data" src="/api/activity?limit=500" pager page-size="10" page-size-options="5, 10, 15, 20"></zing-grid>
+
+  </body>
+</html>

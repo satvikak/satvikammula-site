@@ -180,7 +180,7 @@ function getPageLoadData() {
         activityDataContainer.push({
             sessionID: userSessionID,
             userAction: userAction,
-            timestamp: Date.now(),
+            timestamp: new Date(Date.now()).toLocaleString(),
             ...data
         });
         // If there are >=25 activities in localStorage, we push it to the server to make space (don't want to hog local storage space)

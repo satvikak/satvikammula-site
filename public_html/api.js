@@ -186,7 +186,10 @@ app.delete('/api/performance/:id', async (request, response) => {
 
 app.get("/api/activity", async (request, response) => {
     try {
-        const activityData = await myActivityData.find().toArray();
+        const limit = parseInt(request.query.limit); // undefined if not passed
+        let cursor = myActivityData.find().sort({ timestamp: -1 }); // most recent first
+        if (limit) cursor = cursor.limit(limit);
+        const activityData = await cursor.toArray();
         response.json(activityData);
     } 
     catch (error) {
