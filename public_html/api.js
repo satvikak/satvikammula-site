@@ -6,8 +6,10 @@ const port = 3001;
 app.use(express.json());
 // app.use(bodyParser.json());
 
-const mongoConnectURI = "mongodb://satvi:mongoMangodbMilkshake@127.0.0.1:27017/cse135?authSource=cse135";
-const myDB = "cse135";
+require('dotenv').config({ path: './secret.env' });
+const mongoConnectURI = process.env.MONGO_URI;
+
+const myDB = "cse135"
 
 let db, myStaticData, myPerformanceData, myActivityData;
 

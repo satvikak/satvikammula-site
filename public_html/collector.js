@@ -215,7 +215,7 @@ function getPageLoadData() {
     }
 
     // Used to periodically clean the local storage, another mechanism to not hog up the localServer space
-    setInterval(cleanoutActivityData, sendOften);
+    let cleanoutTimer = setInterval(cleanoutActivityData, sendOften);
 
     let idleBreakStart = null;
     let ifIdleCheck = null;
