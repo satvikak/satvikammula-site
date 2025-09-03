@@ -1,20 +1,25 @@
+
+// Using NodeJS with Express
 const express = require("express");
-// const bodyParser = require("body-parser")
+// Ensure we can connect MongoDB to the API
 const {MongoClient, ObjectId} = require("mongodb");
 const app = express();
 const port = 3001;
 app.use(express.json());
-// app.use(bodyParser.json());
 
+// We use a secret file to access the database login/secure connection info
 require('dotenv').config({ path: './secret.env' });
 const mongoConnectURI = process.env.MONGO_URI;
 
+// We work in the cse135 --> where all our collections are stored
 const myDB = "cse135"
 
 let db, myStaticData, myPerformanceData, myActivityData;
 
+// Formally connect to the MongoDB cloud
 MongoClient.connect(mongoConnectURI).then(client => {
     db = client.db(myDB);
+    // We instantiate the static/performance/activity collections if necessary
     myStaticData = db.collection("static");
     myPerformanceData = db.collection("performance");
     myActivityData = db.collection("activity");
@@ -23,6 +28,7 @@ MongoClient.connect(mongoConnectURI).then(client => {
     });
 }).catch(error => console.error("Mongo connection error:", error));
 
+// Since MongoDB specifically develops the id's, we use this to decode them better, and look them up easier
 const idParseHelper = (id) => {
     try {
         return new ObjectId(id);
@@ -32,99 +38,132 @@ const idParseHelper = (id) => {
     }
 };
 
+// ROUTE: GET /api/static
 app.get("/api/static", async (request, response) => {
+    // We try to get all the static collection data and see if we are successful
     try {
         const staticData = await myStaticData.find().toArray();
         response.json(staticData);
     } 
+    // If we error for some reason, we send an appropriate error response
     catch (error) {
         console.error("Error fetching static item:", error);
         response.status(500).json({ error: "Failed to fetch static item" });
     }
 });
 
+// ROUTE: GET /api/static/:id
 app.get("/api/static/:id", async (request, response) => {
+    // We parse the MongoDB generated ID
     const _id = idParseHelper(request.params.id);
+    // If the user enters an invalid ID, we let them know
     if(!_id) {
         return response.status(404).json({error: "That id doesn't exist!"});
     }
+    // We try to recover the entry connected to the unique id
     try {
         const requestedItem = await myStaticData.findOne({_id});
+        // If for some reason the id is unavilable or null, we report bacl
         if(!requestedItem) {
             return response.status(404).json({error: "We can't find that static item!"})
         }
+        // Successful
         response.json(requestedItem);
     }
+    // If the server had difficulty getting the item, we report accordingly
     catch (error) {
         console.error("Error fetching static item:", error);
         response.status(500).json({error: "Failed to fetch static item"})
     }
 })
 
+// ROUTE: POST /api/static
 app.post('/api/static', async (request, response) => {
     const {_id, ...body} = request.body;
+    // We ensure that users cant attach an id to a POST request
     if(_id) {
         return response.status(400).json({ error: "POST requests cannot have an ID" });
     }
+    // We attempt inserting the user's entry into our static collection
     try {
         const myNewItem = await myStaticData.insertOne(body);
         response.status(201).json({ _id: myNewItem.insertedId, ...body });
-    } catch (error) {
+    }
+    // If unsuccessful in posting, we report accordingly 
+    catch (error) {
         console.error("Error creating static item:", error);
         response.status(500).json({ error: "Failed to create static item" });
     }
 });
 
+// ROUTE: PUT /api/static/id
 app.put('/api/static/:id', async (request, response) => {
     const _id = idParseHelper(request.params.id);
+    // We check if the user's id is valid
     if(!_id) {
         return response.status(404).json({ error: "That id doesn't exist!" });
     }
+    // We attempting changing updating an entry with the user's entry
     try {
         const changeMyItem = await myStaticData.findOneAndUpdate({ _id }, { $set: request.body }, { returnDocument: "after" });
+        // If for some reason the body is null we report accordingly
         if (!changeMyItem.value) {
             return response.status(404).json({ error: "We can't find that static item!" });
         }
+        // Successful
         response.json(changeMyItem.value);
-    } catch (error) {
+    }
+    // If we error in updating, we report accordingly 
+    catch (error) {
         console.error("Error updating static item:", error);
         response.status(500).json({ error: "Failed to update static item" });
     }
 });
 
+// ROUTE: DELETE /api/static/id
 app.delete('/api/static/:id', async (request, response) => {
     const _id = idParseHelper(request.params.id);
+    // We validate to make sure the id exists
     if(!_id) {
         return response.status(404).json({ error: "That id doesn't exist!" });
     }
+    // We attempt deleting
     try {
         const deleteMyItem = await myStaticData.findOneAndDelete({ _id });
-        if (!deleteMyItem.value) {
+        if (!deleteMyItem) {
             return response.status(404).json({ error: "We can't find that static item!" });
         }
-        response.json(deleteMyItem.value);
-    } catch (error) {
+        response.json({message: "Item successfully deleted"});
+    } 
+    // If we error in deleting we report back accordingly
+    catch (error) {
         console.error("Error deleting static item:", error);
         response.status(500).json({ error: "Failed to delete static item" });
     }
 });
 
+// ROUTE: GET /api/static
 app.get("/api/performance", async (request, response) => {
+    // We try to get all the performance collection data and see if we are successful
     try {
         const performanceData = await myPerformanceData.find().toArray();
         response.json(performanceData);
     } 
+    // If we error in fetching data, we report back accordingly
     catch (error) {
         console.error("Error fetching performance item:", error);
         response.status(500).json({ error: "Failed to fetch performance item" });
     }
 });
 
+// ROUTE: GET /api/performance/:id
 app.get("/api/performance/:id", async (request, response) => {
     const _id = idParseHelper(request.params.id);
+    // We try to recover the entry connected to the unique id
     if(!_id) {
         return response.status(404).json({error: "That id doesn't exist!"});
     }
+    // We try fetching the user's requested entry
     try {
         const requestedItem = await myPerformanceData.findOne({_id});
         if(!requestedItem) {
@@ -132,79 +171,102 @@ app.get("/api/performance/:id", async (request, response) => {
         }
         response.json(requestedItem);
     }
+    // If we are unable to get the entry, we report back
     catch (error) {
         console.error("Error fetching performance item:", error);
         response.status(500).json({error: "Failed to fetch performance item"})
     }
 })
 
+// ROUTE: POST /api/performance
 app.post('/api/performance', async (request, response) => {
     const {_id, ...body} = request.body;
+    // We ensure that the user doesn't enter an id with a post request
     if(_id) {
         return response.status(400).json({ error: "POST requests cannot have an ID" });
     }    
+    // We attempt creating a new performance item
     try {
         const myNewItem = await myPerformanceData.insertOne(body);
         response.status(201).json({ _id: myNewItem.insertedId, ...body });
-    } catch (error) {
+    }
+    // If we are unable to make a new performance item, we report back 
+    catch (error) {
         console.error("Error creating performance item:", error);
         response.status(500).json({ error: "Failed to create performance item" });
     }
 });
 
+// ROUTE: PUT /api/performance/id
 app.put('/api/performance/:id', async (request, response) => {
     const _id = idParseHelper(request.params.id);
+    // We check if the id is valid
     if(!_id) {
         return response.status(404).json({ error: "That id doesn't exist!" });
     }
+    // We try updating an existing entry
     try {
         const changeMyItem = await myPerformanceData.findOneAndUpdate({ _id }, { $set: request.body }, { returnDocument: "after" });
         if (!changeMyItem.value) {
             return response.status(404).json({ error: "We can't find that performance item!" });
         }
         response.json(changeMyItem.value);
-    } catch (error) {
+    } 
+    // We report back if unsucessful
+    catch (error) {
         console.error("Error updating performance item:", error);
         response.status(500).json({ error: "Failed to update performance item" });
     }
 });
 
+// ROUTE: DELETE /api/performance/id
 app.delete('/api/performance/:id', async (request, response) => {
     const _id = idParseHelper(request.params.id);
+    // We check if the user id is valid
     if(!_id) {
         return response.status(404).json({ error: "That id doesn't exist!" });
     }
+    // We attempt deleting an entry
     try {
         const deleteMyItem = await myPerformanceData.findOneAndDelete({ _id });
-        if (!deleteMyItem.value) {
+        if (!deleteMyItem) {
             return response.status(404).json({ error: "We can't find that performance item!" });
         }
-        response.json(deleteMyItem.value);
-    } catch (error) {
+        response.json({message: "Item successfully deleted"});
+    } 
+    // If unsuccessful we report back
+    catch (error) {
         console.error("Error deleting performance item:", error);
         response.status(500).json({ error: "Failed to delete performance item" });
     }
 });
 
+// ROUTE: GET /api/activity
 app.get("/api/activity", async (request, response) => {
+    // We try fetching the activity data
     try {
-        const limit = parseInt(request.query.limit); // undefined if not passed
-        let cursor = myActivityData.find().sort({ timestamp: -1 }); // most recent first
+        // The below is mainly used for the activity table on the database.html, it helps in printing the most recent x entries, not the whole base 
+        const limit = parseInt(request.query.limit);
+        let cursor = myActivityData.find().sort({ timestamp: -1 });
         if (limit) cursor = cursor.limit(limit);
         const activityData = await cursor.toArray();
         response.json(activityData);
     } 
+    // If unsuccessful we report back
     catch (error) {
         console.error("Error fetching activity item:", error);
         response.status(500).json({ error: "Failed to fetch activity item" });
     }
 });
 
+// ROUTE: GET /api/performance/:id
 app.get("/api/activity/:id", async (request, response) => {
     const _id = idParseHelper(request.params.id);
+    // We try to recover the entry connected to the unique id
     if(!_id) {
         return response.status(404).json({error: "That id doesn't exist!"});
     }
+    // We try fetching the user's requested activity entry
     try {
         const requestedItem = await myActivityData.findOne({_id});
         if(!requestedItem) {
@@ -212,55 +274,71 @@ app.get("/api/activity/:id", async (request, response) => {
         }
         response.json(requestedItem);
     }
+    // Report back if unsuccessful
     catch (error) {
         console.error("Error fetching activity item:", error);
         response.status(500).json({error: "Failed to fetch activity item"})
     }
 })
 
+// ROUTE: POST /api/activity
 app.post('/api/activity', async (request, response) => {
     const {_id, ...body} = request.body;
+    // We ensure that post requests dont get id input
     if(_id) {
         return response.status(400).json({ error: "POST requests cannot have an ID" });
-    }    
+    }  
+    // We attempt adding a new activity item  
     try {
         const myNewItem = await myActivityData.insertOne(body);
         response.status(201).json({ _id: myNewItem.insertedId, ...body });
-    } catch (error) {
+    }
+    // We report back if unsuccessful 
+    catch (error) {
         console.error("Error creating activity item:", error);
         response.status(500).json({ error: "Failed to create activity item" });
     }
 });
 
+// ROUTE: PUT /api/activity/id
 app.put('/api/activity/:id', async (request, response) => {
     const _id = idParseHelper(request.params.id);
+    // We check if the user id is valid
     if(!_id) {
         return response.status(404).json({ error: "That id doesn't exist!" });
     }
+    // We attempt updating an existing entry
     try {
         const changeMyItem = await myActivityData.findOneAndUpdate({ _id }, { $set: request.body }, { returnDocument: "after" });
         if (!changeMyItem.value) {
             return response.status(404).json({ error: "We can't find that activity item!" });
         }
         response.json(changeMyItem.value);
-    } catch (error) {
+    } 
+    // If unsuccessful we report back
+    catch (error) {
         console.error("Error updating activity item:", error);
         response.status(500).json({ error: "Failed to update activity item" });
     }
 });
 
+// ROUTE: DELETE /api/activity/id
 app.delete('/api/activity/:id', async (request, response) => {
     const _id = idParseHelper(request.params.id);
+    // We see if the user's id is valid
     if(!_id) {
         return response.status(404).json({ error: "That id doesn't exist!" });
     }
+    // We attempt deleting an entry
     try {
         const deleteMyItem = await myActivityData.findOneAndDelete({ _id });
-        if (!deleteMyItem.value) {
+        if (!deleteMyItem) {
             return response.status(404).json({ error: "We can't find that activity item!" });
         }
-        response.json(deleteMyItem.value);
-    } catch (error) {
+        response.json({message: "Item successfully deleted"});
+    }
+    // We report back if unsuccessful 
+    catch (error) {
         console.error("Error deleting activity item:", error);
         response.status(500).json({ error: "Failed to delete activity item" });
     }

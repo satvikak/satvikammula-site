@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../styles.css" />
     <style>
       section { margin-bottom: 32px; }
-      
+      /* Sets the body and headers to have the same CSS styles as my other pages */
       body {
         background-color: green;
         color: white;
@@ -24,18 +24,17 @@
         color: white; 
       }
 
+      /* Add some better table sizing and allow custom table font */
       zing-grid {
         height: 400px;
         overflow: auto;
         margin-bottom: 32px;
-      }
-
-      zing-grid {
         font-family: 'Comfortaa', sans-serif; 
       }
 
+      /* Add some extra CSS styline to the table itself */
       zing-grid zg-caption {
-        background-color: #fc8eac;  /* Dark pink */
+        background-color: #fc8eac;
         color: white;
         padding: 1rem; 
         font-weight: bold;
@@ -46,7 +45,9 @@
   </head>
   <body>
     <h1 class="mainTitle">Database</h1>   
-  <!-- Static Data Grid -->
+    <!-- Here we are generating the static data table from the API-->
+    <!-- Custom Column Header's aren't always, but some of my headers were mislabeled so I manually labeled the headers and then pulled the data from the API -->
+    <!-- Some customization, so 10 entries per page, we can access in groups of 5, and we only allow 500 entries to be shown to not overflow site -->
     <zing-grid id="static-data" pager page-size="10" page-size-options="5, 10, 15, 20" src="/api/static?limit=500">
         <zg-caption>Static Data</zg-caption>
         <zg-colgroup>
@@ -67,10 +68,11 @@
         </zg-colgroup>
     </zing-grid>
 
+    <!-- Here we are generating the performance data table from the API-->
+    <!-- Custom Column Header's aren't always, but I wanted to reorder some headers so I listed them all -->
+    <!-- Some customization, so 10 entries per page, we can access in groups of 5, and we only allow 500 entries to be shown to not overflow site -->
     <zing-grid id="performance-data" pager page-size="10" page-size-options="5, 10, 15, 20" src="/api/performance?limit=500">
       <zg-caption>Performance Data</zg-caption>
-      
-      <!-- Column Group with Explicit Column Names -->
       <zg-colgroup>
         <!-- Session and Load Columns -->
         <zg-column header="ID" index="_id" type="text"></zg-column>
@@ -121,6 +123,8 @@
       
     </zing-grid>
     
+    <!-- Here we are generating the activity data table from the API-->
+    <!-- We set a limit of 500 and don't do custom headers because there is so much data -->
     <zing-grid caption="Activity Data" src="/api/activity?limit=500" pager page-size="10" page-size-options="5, 10, 15, 20"></zing-grid>
 
   </body>

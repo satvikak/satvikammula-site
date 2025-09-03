@@ -1,0 +1,354 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Data Visualization</title>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
+  <style>
+    
+    /* Here  we build the page, using the CSS styles that are present on my other pages*/
+    body {
+      background-color: green;
+      color: white;
+      margin: 0;
+      padding: 0;
+      font-family: 'Comfortaa', sans-serif;
+    }
+    h1.mainTitle {
+      background-color: #db5079;
+      padding: 1.5rem;
+      text-align: center;
+      color: white;
+    }
+    /* Here we add some chart characteristics, for instance setting sizes, their background colors, margins, etc. */
+    .chart-container {
+      width: 80%;
+      margin: 2rem auto;
+      background: #fc8eac;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    }
+    .chart-title {
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      font-size: 24px;
+    }
+    .chart {
+      width: 100%;
+      height: 400px;
+    }
+  </style>
+</head>
+<body>
+  <h1 class="mainTitle">Data Visualization</h1>
+
+  <!-- Here we instantize our 3-series line chart -->
+  <div class="chart-container">
+    <div class="chart-title">Page Load Times Across Browsers</div>
+    <div id="lineChart" class="chart"></div>
+  </div>
+
+  <!-- Here we instantize our 2-series bar chart -->
+  <div class="chart-container">
+    <div class="chart-title">Page Visit Popularity (Desktop vs Mobile)</div>
+    <div id="barChart" class="chart"></div>
+  </div>
+
+  <!-- Here we instantize our pie chart -->
+  <div class="chart-container">
+    <div class="chart-title">User Language Distribution</div>
+    <div id="pieChart" class="chart"></div>
+  </div>
+
+  <script>
+
+    // Below, we have some helper functions that are used to extract data from our database
+
+    // This function helps understand the actual device type given a userString
+    // It utilizes the device types of my computer and the fake data we generated
+    function getDeviceType(userAgent) {
+      if (/iOS|Android/.test(userAgent)) return 'Mobile';
+      if (/iPad|Amazon Fire/.test(userAgent)) return 'Tablet';
+      if (/Mac|Windows/.test(userAgent)) return 'Desktop';
+      return 'Unknown';
+    }
+
+    // This function helps us understand the actual browser given a userEntry string
+    // From my computer and our fake data, we assume the user browsers as Chrome/Edge/Safari
+    function getBrowser(userAgent) {
+      if (/Edge\//.test(userAgent)) return 'Edge';
+      if (/Chrome/.test(userAgent) && !/Edge\//.test(userAgent)) return 'Chrome';
+      if (/Safari/.test(userAgent) && !/Chrome/.test(userAgent)) return 'Safari';
+      return 'Other';
+    }
+
+    // We note the color aesthetic to use for the various charts, for CSS customization of our charts
+    const colors = ['#57167E', '#EA5F89', '#F7B7A3', '#9B3192', '#FFF169'];
+
+    // This helps us fetch all the data from our static/performance/activity collections and then store them here for easy indexing/access
+    Promise.all([
+      fetch('/api/static').then(r => r.json()),
+      fetch('/api/performance').then(r => r.json()),
+      fetch('/api/activity').then(r => r.json())
+    ]).then(([staticData, performanceData, activityData]) => {
+
+      // Here, we store a user info dataset
+      // Maps a userSession ID to a device entry, browser, and language, so that sessions are consisted/not repeated data
+      // Everyone can access the device/browser/language connected to a unqiue user session
+      const userInfo = {};
+      staticData.forEach(entry => {
+        userInfo[entry.userSessionID] = {
+          device: getDeviceType(entry.userAgentString),
+          browser: getBrowser(entry.userAgentString),
+          language: entry.userLanguage || 'Unknown'
+        };
+      });
+
+      // Here we store a dataset of the load times for the 3-series line chart
+      const loadTimes = {}; 
+      // Again, each unique session --> browser --> { Desktop: [], Mobile: [], Tablet: [] } }
+      // So basically, we store a user's unique load types in their history
+      performanceData.forEach(entry => {
+        const session = userInfo[entry.userSessionID];
+        if (!session) return;
+        if (!loadTimes[session.browser]) loadTimes[session.browser] = { Desktop: [], Mobile: [], Tablet: [] };
+        loadTimes[session.browser][session.device].push(entry.totalLoad);
+      });
+
+      // Here, we note the browser/device names for later rendering of our chart
+      const browsers = ['Chrome', 'Safari', 'Edge'];
+      const devices = ['Desktop', 'Mobile', 'Tablet'];
+      
+      // Here, we return a "packet" containing the average average load time of each device for each browser
+      const lineSeries = devices.map((device, idx) => {
+        // Sets a color for each individual device
+        const color = colors[idx];
+        return {
+          text: device,
+          values: browsers.map(browser => {
+            const times = (loadTimes[browser] && loadTimes[browser][device]) || [];
+            // We take the average load time for a device on a certain browser
+            // So if we are on desktop, we average all the desktop load times on chrome
+            return times.length ? Math.round(times.reduce((a,b) => a+b, 0) / times.length) : 0;
+          }),
+          // We ensure that the line color and data dots correspond
+          lineColor: color,
+          marker: { backgroundColor: color, size: 6 }
+        };
+      });
+
+      // We actually render the chart so its viewable
+      zingchart.render({
+        id: 'lineChart',
+        data: {
+          type: 'line',
+          series: lineSeries,
+          // We customize our X-axis/Y-axis/legend
+          scaleX: {
+            labels: browsers,
+            label: { text: 'Browser', fontFamily: 'Comfortaa', fontSize: 10, fontColor: 'black' },
+            item: { fontFamily: 'Comfortaa', fontSize: 14, fontColor: 'black' },
+            guide: { visible: true }
+          },
+          scaleY: {
+            minValue: 0,
+            label: { text: 'Load Time (ms)', fontFamily: 'Comfortaa', fontSize: 8, fontColor: 'black' },
+            item: { fontFamily: 'Comfortaa', fontSize: 14, fontColor: 'black' }
+          },
+          legend: { layout: 'horizontal', align: 'center', item: { fontFamily: 'Comfortaa', fontColor: 'black', fontSize: 14 } },
+          // We also allow for hovering over the datapoint to see the true value
+          tooltip: { text: "%v ms", fontFamily: 'Comfortaa' }
+        },
+        height: '400px',
+        width: '100%'
+      });
+
+      // Here, we do the computation for our 2-series bar chart
+      // Again, we use datasets to map things to each oter
+      const pageVisitCounts = {};
+      const userDeviceMap = {};
+      // Each connect each device to a unique user session
+      staticData.forEach(entry => userDeviceMap[entry.userSessionID] = getDeviceType(entry.userAgentString));
+      // We make sure we only work with page entry for this chart
+      activityData.forEach(entry => {
+        if (entry.userAction !== 'pageEnter') {
+          return;
+        }
+        let page = entry.onPage || "Unknown";
+        // In case of some case differences, we make sure they count as the same site
+        if (page === "https://satvikammula.site/") {
+          page = "https://satvikammula.site";
+        }
+
+        // We go through each of the devices in our activity and see what session they are connected to
+        const device = userDeviceMap[entry.sessionID] || 'unknown';
+        // If the page doesn't exist in our dataset yet, we instantiate it as a potentially visited site
+        if (!pageVisitCounts[page]) pageVisitCounts[page] = { desktop: 0, mobile: 0 };
+        // Depending on if the device is a desktop/mobile, we add the page views accordingly
+        if (device === 'Desktop') pageVisitCounts[page].desktop++;
+        if (device === 'Mobile') pageVisitCounts[page].mobile++;
+      });
+
+      // Here, we actually set up the datablocks/legend for desktop/mobile, with custom CSS styling
+      const barSeries = [
+        {
+          values: Object.values(pageVisitCounts).map(count => count.desktop),
+          text: "Desktop",
+          backgroundColor: "#57167E"
+        },
+        {
+          values: Object.values(pageVisitCounts).map(count => count.mobile),
+          text: "Mobile",
+          backgroundColor: "#EA5F89"
+        }
+      ];
+
+      const pageNames = Object.keys(pageVisitCounts);
+
+      // Here, we actually render the chart
+      zingchart.render({
+        id: 'barChart',
+        data: {
+          type: 'bar',
+          series: barSeries,
+          // We customize our X-axis/Y-axis/bucket values and include CSS customization
+          scaleX: {
+            label: {
+              text: 'Page Visited',
+              fontFamily: 'Comfortaa',
+              fontSize: '10',
+              fontColor: "black"
+            },
+            labels: ["About Me", "Homepage", "DataViz", "Database"],
+            item: {
+              fontFamily: 'Comfortaa',
+              fontSize: 14,
+              fontColor: "black"
+            }
+          },
+          scaleY: {
+            label: {
+              text: "Number of Visits",
+              fontFamily: 'Comfortaa',
+              fontSize: 10,
+              fontColor: "black"
+            },
+            item: {
+              fontFamily: 'Comfortaa',
+              fontSize: 14,     
+              fontColor: "black"
+            }
+
+          },
+          // Here, we ensure customization in our legend
+          legend: {
+            layout: 'horizontal',
+            align: 'center',
+            item: {
+              fontFamily: 'Comfortaa',
+              fontColor: '#333',
+              fontSize: 14
+            }
+          },
+          // We also allow for hovering to get exact datapoint values
+          tooltip: {
+            fontFamily: 'Comfortaa',
+            text: "%t: %v visits",
+            visible: true
+          }
+        },
+        height: '400px',
+        width: '100%'
+      });
+
+      // Here, we set up our charting for the pie chart
+      // We start with a session set, because in terms of language distribution, we can't have repeated users
+      const sessionIDs = new Set();
+      const languageCounts = {};
+      // We go through our static data and observe the language
+      staticData.forEach(entry => {
+        // If the user hasn't been observed yet, we note down there site language
+        if (!sessionIDs.has(entry.userSessionID)) {
+          sessionIDs.add(entry.userSessionID);
+          const lang = entry.userLanguage || 'Unknown';
+          languageCounts[lang] = (languageCounts[lang] || 0) + 1;
+        }
+      });
+
+      // We use custom labeling, using that from my computer and our fake generated data
+      const languageLabels = {
+        "en-US": "English-US", "es-ES": "Spanish-Spain",
+        "fr-FR": "French-France", "hi-IN": "Hindi-India",
+        "zh-CN": "Chinese-China"
+      };
+
+      // Here, we build the chart itself, mapping our languages to their counts
+      const pieSeries = Object.entries(languageCounts).map(([lang, count], idx) => ({
+        values: [count],
+        text: languageLabels[lang] || lang,
+        // We allow for hovering, so you can see exactly the number of users and not percents
+        'data-tooltipText': `${languageLabels[lang] || lang}: ${count} users`,
+        // We set the colors of our slices as desired for CSS customization
+        backgroundColor: colors[idx % colors.length]
+      }));
+
+      // Here we actually render the chart
+      zingchart.render({
+        id: 'pieChart',
+        data: {
+          type: 'pie',
+          series: pieSeries,
+          // Here we CSS customize the actual slices
+          plot: {
+            valueBox: {
+              fontFamily: 'Comfortaa',
+              fontSize: 18,
+              fontColor: 'white',
+              fontWeight: 'bold'
+            }
+          },
+          // Here we customize the legend
+          legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            width: '200px',
+            item: {
+              fontFamily: 'Comfortaa', 
+              fontColor: '#333',
+              fontSize: 14,
+              fontWeight: 'bold'
+            },
+            // Here we customize the legend a little more, making sure it corresponds with the slice colors
+            marker: {
+              type: 'square', 
+              borderColor: '#fff',
+              borderWidth: 1,
+              backgroundColor: function (data) { 
+                return getColorForIndex(data.index);
+              }
+            }
+          },
+          label: {
+            fontFamily: 'Comfortaa',
+            visible: false
+          },
+          // Here, we again allow for hovering to see exact data counts
+          tooltip: {
+            fontFamily: 'Comfortaa',
+            visible: true,
+            text: "%data-tooltipText"
+          }
+        },
+        height: '100%',
+        width: '100%'
+      });
+    }).catch(err => console.error("Error fetching data:", err));
+    // We catch any errors if the data didn't fetch for some reason
+  </script>
+</body>
+</html>

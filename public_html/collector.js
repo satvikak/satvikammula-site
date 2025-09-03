@@ -124,36 +124,42 @@ function getStaticPerformanceData() {
  * - total load time
  */
 
-    // Create a container to store the performance data
-    const performanceDataContainer = {};
-    // Main mechanism for performance data collection
-    if(performance.getEntriesByType && performance.getEntriesByType("navigation").length > 0) {
-        const timeCheck = performance.getEntriesByType("navigation")[0]
-        // Get whole timing object
-        performanceDataContainer.timeObject = JSON.parse(JSON.stringify(timeCheck));
-        // Get when page started loading
-        performanceDataContainer.loadStart = timeCheck.startTime;
-        // Get when page ended loading
-        performanceDataContainer.loadEnd = timeCheck.loadEventEnd;
-        // Get total load time
-        performanceDataContainer.totalLoad = performanceDataContainer.loadEnd-performanceDataContainer.loadStart;
-    }
-    // Mechanism for performance data collection if previous is not enabled
-    else {
-        const timeCheck = window.performance.timing;
-        // Get whole timing object
-        performanceDataContainer.timeObject = JSON.parse(JSON.stringify(timeCheck));
-        // Get when page started loading
-        performanceDataContainer.loadStart = timeCheck.navigationStart;
-        // Get when page ended loading
-        performanceDataContainer.loadEnd = timeCheck.loadEventEnd;
-        // Get total load time
-        performanceDataContainer.totalLoad = performanceDataContainer.loadEnd-performanceDataContainer.loadStart;
-    }
+    // New function to ensure that the performance data is loaded correctly
+    // Before page load was always zero, since it activated after the page finished loading
+    function recordPerformance() {
+        // Create a container to store the performance data
+        const performanceDataContainer = {};
+        // Main mechanism for performance data collection
+        if(performance.getEntriesByType && performance.getEntriesByType("navigation").length > 0) {
+            const timeCheck = performance.getEntriesByType("navigation")[0]
+            // Get whole timing object
+            performanceDataContainer.timeObject = JSON.parse(JSON.stringify(timeCheck));
+            // Get when page started loading
+            performanceDataContainer.loadStart = timeCheck.startTime;
+            // Get when page ended loading
+            performanceDataContainer.loadEnd = timeCheck.loadEventEnd;
+            // Get total load time
+            performanceDataContainer.totalLoad = performanceDataContainer.loadEnd-performanceDataContainer.loadStart;
+        }
+        // Mechanism for performance data collection if previous is not enabled
+        else {
+            const timeCheck = window.performance.timing;
+            // Get whole timing object
+            performanceDataContainer.timeObject = JSON.parse(JSON.stringify(timeCheck));
+            // Get when page started loading
+            performanceDataContainer.loadStart = timeCheck.navigationStart;
+            // Get when page ended loading
+            performanceDataContainer.loadEnd = timeCheck.loadEventEnd;
+            // Get total load time
+            performanceDataContainer.totalLoad = performanceDataContainer.loadEnd-performanceDataContainer.loadStart;
+        }
 
-    // Make sure that the performance is tied to a user session, and all attributes are saved
-    performanceDataContainer.userSessionID = userSessionID;
-    localStorage.setItem("performanceData", JSON.stringify(performanceDataContainer));
+        // Make sure that the performance is tied to a user session, and all attributes are saved
+        performanceDataContainer.userSessionID = userSessionID;
+        localStorage.setItem("performanceData", JSON.stringify(performanceDataContainer));
+    }
+    // Make sure we call performance as we load the page
+    window.addEventListener("load", () => setTimeout(recordPerformance, 300));
 }
 
 /**
@@ -275,8 +281,8 @@ function getPageLoadData() {
         }
     }
 
-    // We track when the user entered the page
-    activityItemMaker("pageEnter", {pageEnterTime: new Date().toISOString()})
+    // We track when the user entered the page and what page they entered on
+    activityItemMaker("pageEnter", {pageEnterTime: new Date().toISOString(), onPage: window.location.href})
 
     // We check for all thrown errors
     window.addEventListener("error", function (errorEvent) {
@@ -321,11 +327,11 @@ function getPageLoadData() {
             })
         }    
 
-        // We track when the user left the page
-        activityItemMaker("pageLeave", { pageLeaveTime: new Date().toISOString() });
+        // We track when the user left the page and what page they left from
+        activityItemMaker("pageLeave", { pageLeaveTime: new Date().toISOString(), onPage: window.location.href });
         
         // We track which page the user was on
-        activityItemMaker("onPage", { onPage: window.location.href });
+        // activityItemMaker("onPage", { onPage: window.location.href });
 
 
         // Flatten container to avoid nested arrays
