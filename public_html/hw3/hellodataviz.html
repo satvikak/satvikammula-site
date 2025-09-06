@@ -183,6 +183,9 @@
         if (page === "https://satvikammula.site/") {
           page = "https://satvikammula.site";
         }
+        if(page!=="https://satvikammula.site" && page!=="https://satvikammula.site/members/satvikammula.html" && page!=="https://satvikammula.site/hw3/database.html" && page!=="https://satvikammula.site/hw3/hellodataviz.html") {
+          page = "Other";
+        }
 
         // We go through each of the devices in our activity and see what session they are connected to
         const device = userDeviceMap[entry.sessionID] || 'unknown';
@@ -223,7 +226,7 @@
               fontSize: '10',
               fontColor: "black"
             },
-            labels: ["About Me", "Homepage", "DataViz", "Database"],
+            labels: ["DataViz", "Database", "About Me","Homepage", "CGI-bins"],
             item: {
               fontFamily: 'Comfortaa',
               fontSize: 14,
