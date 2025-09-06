@@ -67,8 +67,13 @@
   </div> -->
 
   <div class="chart-container">
-    <div class="chart-title">Network Type Distribution</div>
+    <div class="chart-title">Network Type Chart</div>
     <div id="networkTypeChart" class="chart"></div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">Day Activity Chart</div>
+    <div id="timeOfDayChart" class="chart"></div>
   </div>
 
   <script>
@@ -410,6 +415,7 @@
             text: 'Users per Network Connection Type',
             fontFamily: 'Comfortaa',
             fontSize: 16,
+            fontColor: 'black',
             fontWeight: 'bold'
           },
           type: 'hbar', // changed from 'bar' to 'hbar' for horizontal bars
@@ -431,11 +437,10 @@
           scaleX: {
             labels: sortedLabels,
             label: {
-              text: 'Network \n Type',
+              text: 'Network Type',
               fontFamily: 'Comfortaa',
               fontSize: 14,
-              fontColor: 'black',
-              angle: 0
+              fontColor: 'black'
             },
             item: {
               fontFamily: 'Comfortaa',
@@ -466,17 +471,138 @@
             }
           },
           plotarea: {
-            margin: '65px 40px 60px 140px'
+            margin: '65px 40px 60px 120px'
           },
           subtitle: {
             text: `Sample size: ${networkSessionIDs.size} sessions`,
             fontFamily: 'Comfortaa',
-            fontSize: 10
+            fontSize: 10,
+            fontColor: "black"
           }
         },
         height: '400px',
         width: '100%'
       });
+
+      function calculateHour(timestamp) {
+        const parts = timestamp.split(', ');
+        const timePiece = parts[1];
+        [time, ampm] = timePiece.split(' ');
+        let [hours, minutes, seconds] = time.split(':').map(Number);
+          if (ampm === 'PM' && hours !== 12) {
+            hours += 12;
+          }
+          if (ampm === 'AM' && hours === 12) {
+            hours = 0;
+          }
+          return hours;
+      }
+
+      const hourlyCounts = Array(24).fill(0);
+      let activityCount = 0
+      let specialCount = 0
+      activityData.forEach(entry => {
+        if(entry.userAction!=="idleBreak" && entry.userAction!=="pageEnter" && entry.userAction!=="pageLeave") {
+          const hour = calculateHour(entry.timestamp);
+          if(hour===21) {
+            specialCount+=1;
+          }
+          hourlyCounts[hour]++;
+          activityCount+=1;
+        }
+      });
+
+      zingchart.render({
+        id: 'timeOfDayChart',
+        data: {
+          type: 'line',
+          title: {
+            text: 'Hourly Site Engagement',
+            fontFamily: 'Comfortaa',
+            fontSize: 16,
+            fontColor: "black",
+            fontWeight: 'bold',
+          },
+          subtitle: {
+            text: `Based on ${activityCount} user actions`,
+            fontFamily: 'Comfortaa',
+            fontSize: 10,
+            fontColor: "black"
+          },
+          series: [{
+            values: hourlyCounts,
+            text: 'User Actions',
+            lineColor: '#B14EBB',
+            lineWidth: 3,
+            marker: {
+              backgroundColor: '#B14EBB',
+              borderColor: 'white',
+              size: 4
+            }
+          }],
+          scaleX: {
+            label: {
+              text: 'Hour of Day (0–23)',
+              fontFamily: 'Comfortaa',
+              fontSize: 14,
+              fontColor: 'black'
+            },
+            labels: [...Array(24).keys()],
+            item: {
+              fontFamily: 'Comfortaa',
+              fontSize: 12,
+              fontColor: 'black'
+            },
+            guide: {
+              visible: true,
+              lineStyle: 'solid',
+              lineColor: '#ccc',
+              lineWidth: 1
+            }
+          },
+          scaleY: {
+            label: {
+              text: 'Number of Engagement Events',
+              fontFamily: 'Comfortaa',
+              fontSize: 14,
+              fontColor: 'black'
+            },
+            item: {
+              fontFamily: 'Comfortaa',
+              fontSize: 12,
+              fontColor: 'black'
+            }
+          },
+          tooltip: {
+            text: "Hour %i: %v actions",
+            fontFamily: 'Comfortaa'
+          },
+          plotarea: {
+            margin: '60px 40px 60px 100px'
+          },
+          labels: [
+            {
+              text: `Peak at hour ${21} with ${specialCount} actions`,
+              fontFamily: 'Comfortaa',
+              fontSize: 9,
+              fontColor: 'white',
+              backgroundColor: '#B14EBB',
+              padding: 5,
+              borderRadius: 4,
+              callout: true,
+              calloutHeight: 10,
+              calloutWidth: 15,
+              hook: `node:plot=0;index=${21}`,
+              offsetX: -82,
+              offsetY: -33,
+              anchor: 'auto'
+            }
+          ]
+        },
+        height: '400px',
+        width: '100%'
+      });
+
     }).catch(err => console.error("Error fetching data:", err));
     // We catch any errors if the data didn't fetch for some reason
   </script>
