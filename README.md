@@ -30,6 +30,16 @@ I decided to use a horizontal bar chart to present this data. Since network type
 
 I briefly considered other options such as a pie chart, but rejected it because the percentages between categories were too close to distinguish easily in slice form. A bar chart offers more precision and readability, which makes it the best choice for this dataset. The resulting visualization not only highlights that 5G is the most common connection type, but also shows that “unknown” connections form a surprisingly large share. This insight reminds us that many users may still face constraints, and pushes us toward optimizations like compressing images, deferring noncritical JavaScript, and preparing for less reliable networks.
 
+## Hourly Site Engagement
+
+For my second chart, I chose to analyze hourly site engagement, measured by the number of interaction events (such as scrolling, mouse movement, key presses, and clicks). This metric helps us understand when users are most active on the site and provides valuable context for planning updates and deployments. In a real development environment, pushing changes during peak usage hours could disrupt user experience and cause frustration. By identifying times of low activity, we can minimize disruption and ensure smoother rollouts.
+
+The data showed that engagement is highest after noon, with a noticeable peak during late-night hours. This insight suggests that maintenance and deployments should be scheduled during early mornings, when activity is minimal. It also raises an interesting secondary consideration: activity before noon was consistently low, which may point to an opportunity to improve site appeal or encourage interaction during daytime hours. Thus, the chart not only informs technical decision-making but also highlights areas for potential user experience improvement.
+
+To visualize this data, I chose a line chart. Because the x-axis represents the 24 hours of a day, a bar chart would have felt cluttered and made it harder to see trends. A line chart, by contrast, makes the flow of engagement throughout the day clear, highlighting sharp rises and falls between adjacent hours. This emphasizes the cyclical nature of activity in a way that is intuitive to comprehend.
+
+In terms of design choices, I added a chart subtitle to indicate the total dataset size, improving transparency and audience trust. I also included tooltips and grid lines, allowing users to view exact values when needed rather than estimating from the line. Finally, I highlighted the peak engagement time with a small annotation box. This directs attention to the most important insight at a glance and connects the chart directly to its practical implications for scheduling updates.
+
 ## CSE135 HW2: Server Side Basics Done 3+ Ways
 
 ## HW2 Website Links
