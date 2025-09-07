@@ -1,0 +1,343 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Detailed Report on Hourly User Engagement</title>
+  <script src="https://cdn.zingchart.com/zingchart.min.js"></script>
+  <script src="https://cdn.zinggrid.com/zinggrid.min.js" defer></script>  
+  <link rel="stylesheet" href="/styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
+  <style>
+    
+    /* We set some chart parameters similar to how we did in Dataviz.html */
+    .chart-container {
+      width: 60%;
+      height: 450px;
+      margin: 2rem auto;
+      background: #fc8eac;
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    }
+    .chart-title {
+      text-align: center;
+      color: white;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      font-size: 24px;
+    }
+    .chart {
+      width: 100%;
+      height: 400px;
+    }
+
+    /* We ensure that our charts have custom styling/CSS */
+    zing-grid#groupedGrid {
+        height: 400px;
+        overflow: auto;
+        margin: 2rem auto 3rem;
+        width: 90vw;
+        font-family: 'Comfortaa', sans-serif;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        border-radius: 10px;
+    }
+
+    zing-grid#groupedGrid zg-caption {
+        background-color: #fc8eac;
+        color: white;
+        padding: 1rem;
+        font-weight: bold;
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+    <!-- Page Title -->
+    <header class="mainTitle">
+        <h1>Detailed Report on Hourly User Engagement</h1>
+    </header>
+    
+    <!-- Guiding Question -->
+    <section class="session">
+        <h2>Question: At what hours of the day are users most active, and how can we leverage these peak times to optimize both engagement and site performance?</h2>
+    </section>
+
+    <!-- Outline how our data is collected that we are visually analyzing -->
+    <section class="mainSections">
+        <div class="sectionTitle DPBubble" style="margin-top: 30px;">
+            <h2>Data Collection</h2>
+        </div>
+        <div class="LPBubble">
+            <h3>To begin answering our guiding question, this report draws on timestamped activity logs gathered through the collector.js script. For the purposes of analysis, I defined user engagement events as any action that indicates deliberate interaction with the site: mouse clicks, mouse movements, scrolls, and key presses. </h3>
+            <h3> Certain event types were deliberately excluded to ensure the data reflects active engagement only. Specifically, "idleActivity", "pageEnter", "pageExit", and "error" events were removed, since these either occur passively or do not reflect intentional user behavior. By filtering in this way, the dataset focuses on meaningful signals of user interaction.</h3>
+            <h3> After filtering, the remaining engagement events were aggregated by hour (0–23) according to their timestamps. This hourly grouping enables us to detect patterns in site usage across the full day and highlight specific windows of peak activity.</h3>
+        </div>
+    </section>
+
+    <section class="mainSections">
+        <div class="sectionTitle DPBubble">
+            <h2>Charts</h2>
+        </div>
+    </section>
+
+    <!-- Visualize/Render our Chart! -->
+    <div class="chart-container">
+        <div class="chart-title">Day Activity Chart</div>
+        <div id="timeOfDayChart" class="chart"></div>
+    </div>
+
+     <!-- Analyze and make our takeways based on the Chart results -->   
+    <section class="mainSections">
+        <div class="sectionTitle DPBubble">
+            <h2>Analysis of Day Activity Chart</h2>
+        </div>
+        <div class="LPBubble">
+            <h3> The hourly engagement chart above shows how active users are at different times of the day. The main question behind this analysis is to figure out when users are most engaged, which helps guide decisions about improving the user experience and planning site maintenance.</h3>
+            <h3> The data shows a clear pattern: engagement is lowest in the early morning (midnight to 10 AM) and gradually increases throughout the day. There’s a small rise in activity between 11 AM and 2 PM, followed by a bigger jump in the evening, peaking between 6 PM and 11 PM. This suggests that users are more active later in the day, likely because of personal routines, work schedules, or time zones. This could mean the site is mostly accessed during free time, like after work or school, when users have more time to interact.</h3>
+            <h3> From a developer's point of view, this data is key for making smart decisions. For example, the early morning hours, when engagement is lowest, are perfect for scheduling maintenance, updates, or new features. This helps avoid disruptions during busy times and ensures the site works smoothly when users need it most. The evening peak also highlights the need to avoid making changes during high-traffic times, as even small issues could frustrate users.</h3>
+            <h3>The chart also brings up important questions about user design. Why is engagement so low in the morning? Are users just not available, or is the site not offering content or features that encourage visits at that time? This opens the door to experimenting with new ideas—like updating content, adding time-based prompts, or introducing features to boost morning activity. In this way, the chart helps us not only solve operational issues but also find ways to improve user engagement.</h3>
+        </div>
+    </section>
+
+    <section class="mainSections">
+        <div class="sectionTitle DPBubble">
+            <h2>Grids</h2>
+        </div>
+    </section>
+
+    <!-- Visualize/Render our Grid! -->   
+    <zing-grid id="groupedGrid" pager page-size="4" layout="row">
+        <zg-caption>Engagement vs Errors by Time of Day</zg-caption>
+        <zg-colgroup>
+            <zg-column index="period" header="Time Period" type="text" align="center"></zg-column>
+            <zg-column index="engagements" header="Total Engagements" type="number" align="center"></zg-column>
+            <zg-column index="errors" header="Total Errors" type="number" align="center"></zg-column>
+        </zg-colgroup>
+    </zing-grid>
+
+    <!-- Analyze and make our takeways based on the Grid results -->
+    <section class="mainSections">
+        <div class="sectionTitle DPBubble">
+            <h2>Analysis of Time of Day Engagement vs Errors Chart</h2>
+        </div>
+        <div class="LPBubble">
+            <h3>The grouped engagement and error data gives us a clearer picture of user behavior and site reliability across different times of day, adding more depth to the hourly engagement chart. While the chart highlights when users are most active, the grid shows how errors fluctuate with engagement, helping identify areas for improvement.</h3>
+            <h3>From a developer's perspective, the biggest takeaway is that most engagement happens in the evening (6,315 engagements), while the morning (189 engagements) and night (147 engagements) see much lower activity. What stands out, however, is the higher error count at night (122 errors compared to 82 in the evening), despite much less user activity. This suggests errors aren't just tied to user volume, and could be related to issues during off-peak hours (like system maintenance or lower resources). Furthermore, the moderate activity in the afternoon (956 engagements) with a steady error rate (104 errors) hints at potential site instability or glitches that need attention. This could be a good opportunity to optimize the site further, especially in the afternoon hours.</h3>
+            <h3>For users, the higher-than-expected errors at night may lead to frustration, especially if they're less likely to return due to a bad experience. This could indicate a need to improve support or ensure a smoother, error-free experience during off-peak times, particularly to boost user retention during peak evening hours.</h3>
+        </div>
+    </section>
+
+    <!-- Overall showcase how our guiding question is answered/responded to by the charts, and list our overall course takeaway -->
+    <section class="mainSections">
+        <div class="sectionTitle DPBubble">
+            <h2>Future Action and Overall Takeway</h2>
+        </div>
+        <div class="LPBubble">
+            <h3>Based on the insights from the analysis, there are a few key actions we can take to improve both user engagement and site performance. First, the higher error rates during off-peak hours (especially at night) suggest that we should schedule maintenance and updates during these quieter times. This would allow us to fix issues without disrupting users during peak hours. Additionally, since morning engagement is low, we could experiment with content or notifications designed to encourage users to visit the site earlier in the day.</h3>
+            <h3>We also noticed that errors remain steady in the afternoon despite moderate engagement, which points to potential performance issues. To address this, we should focus on improving site stability during these hours to keep users happy and prevent frustration. Lastly, improving how we handle errors during the night—when users may be more likely to experience issues—could help retain users by providing a smoother experience when they return later.</h3>
+            <h3>Overall, these analyses highlight a key insight from this course: web analytics should serve both developers and users. By tracking engagement and error patterns, we can design a site that adapts to real-world user behavior. This data encourages a development approach that is responsive and focused on continuous improvement. We not only optimize for functionality but also for the user's experience, ensuring that the site evolves with their needs.</h3>
+        </div>
+    </section>
+
+  <script>
+
+    // This helps us fetch all the data from our static/performance/activity collections and then store them here for easy indexing/access
+    Promise.all([
+      fetch('https://satvikammula.site/api/static').then(r => r.json()),
+      fetch('https://satvikammula.site/api/performance').then(r => r.json()),
+      fetch('https://satvikammula.site/api/activity').then(r => r.json())
+    ]).then(([staticData, performanceData, activityData]) => {
+
+    // Used to extract what hour it is from our timestamp
+    function calculateHour(timestamp) {
+        // Parse and split accordingly
+        const parts = timestamp.split(', ');
+        const timePiece = parts[1];
+        [time, ampm] = timePiece.split(' ');
+        let [hours, minutes, seconds] = time.split(':').map(Number);
+        // Store hour in military form for ease
+        if (ampm === 'PM' && hours !== 12) {
+            hours += 12;
+        }
+        if (ampm === 'AM' && hours === 12) {
+            hours = 0;
+        }
+        return hours;
+    }
+
+    // We save the engagement counts per hour
+    const hourlyCounts = Array(24).fill(0);
+    let activityCount = 0
+    let specialCount = 0
+    activityData.forEach(entry => {
+        // Make sure we don't count activity events that aren't actual activities
+        if(entry.userAction!=="idleBreak" && entry.userAction!=="pageEnter" && entry.userAction!=="pageLeave" && entry.userAction!="error") {
+            const hour = calculateHour(entry.timestamp);
+            // We track the peak count
+            if(hour===21) {
+                specialCount+=1;
+            }
+            hourlyCounts[hour]++;
+            activityCount+=1;
+        }
+    });
+
+    // We render our chart so its visible
+    zingchart.render({
+    id: 'timeOfDayChart',
+    data: {
+        type: 'line',
+        title: {
+        text: 'Hourly Site Engagement',
+        fontFamily: 'Comfortaa',
+        fontSize: 16,
+        fontColor: "black",
+        fontWeight: 'bold',
+    },
+    // We set a subtitle as customization
+    subtitle: {
+        text: `Based on ${activityCount} user actions`,
+        fontFamily: 'Comfortaa',
+        fontSize: 10,
+        fontColor: "black"
+    },
+    series: [{
+        values: hourlyCounts,
+        text: 'User Actions',
+        lineColor: '#B14EBB',
+        lineWidth: 3,
+        marker: {
+            backgroundColor: '#B14EBB',
+            borderColor: 'white',
+            size: 4
+        }
+    }],
+    // We set the x-axis as the hours of the day
+    scaleX: {
+        label: {
+            text: 'Hour of Day (0–23)',
+            fontFamily: 'Comfortaa',
+            fontSize: 14,
+            fontColor: 'black'
+        },
+        labels: [...Array(24).keys()],
+        item: {
+            fontFamily: 'Comfortaa',
+            fontSize: 12,
+            fontColor: 'black'
+        },
+        guide: {
+            visible: true,
+            lineStyle: 'solid',
+            lineColor: '#ccc',
+            lineWidth: 1
+        }
+    },
+    // We set the y-axis as the number of engagement events
+    scaleY: {
+        label: {
+            text: 'Number of Engagement Events',
+            fontFamily: 'Comfortaa',
+            fontSize: 14,
+            fontColor: 'black'
+        },
+        item: {
+            fontFamily: 'Comfortaa',
+            fontSize: 12,
+            fontColor: 'black'
+        }
+    },
+    // We allow for hovering to get exact data values
+    tooltip: {
+        text: "Hour %i: %v actions",
+        fontFamily: 'Comfortaa'
+    },
+    plotarea: {
+        margin: '60px 40px 60px 100px'
+    },
+    // We add a little text box to depict the peak for easy visualization for audience
+    labels: [
+        {
+            text: `Peak at hour ${21} with ${specialCount} actions`,
+            fontFamily: 'Comfortaa',
+            fontSize: 9,
+            fontColor: 'white',
+            backgroundColor: '#B14EBB',
+            padding: 5,
+            borderRadius: 4,
+            callout: true,
+            calloutHeight: 10,
+            calloutWidth: 15,
+            hook: `node:plot=0;index=${21}`,
+            offsetX: -82,
+            offsetY: -33,
+            anchor: 'auto'
+        }
+    ]
+    },
+        height: '400px',
+        width: '100%'
+    });
+
+    // We again make storage for engagement per hour, but also error per hour
+    const hourlyEngagements = Array(24).fill(0);
+    const hourlyErrors = Array(24).fill(0);
+
+    activityData.forEach(entry => {
+        // We calculate the exact hour
+        const hour = calculateHour(entry.timestamp);
+        if (hour >= 0 && hour <= 23) {
+            // We make sure we don't count non-active events
+            if (entry.userAction !== "idleBreak" && entry.userAction !== "pageEnter" && entry.userAction !== "pageLeave" && entry.userAction !== "error") {
+                hourlyEngagements[hour]++;
+            } 
+            // If errors occur at a certain hour we log it
+            else if (entry.userAction === "error") {
+                hourlyErrors[hour]++;
+            }
+        }
+    });
+
+    // We set up a mapping for Zinggrid, so it can correctly format our chart in the columns
+    const engagementErrorData = hourlyEngagements.map((_, hour) => ({
+        hour,
+        engagements: hourlyEngagements[hour],
+        errors: hourlyErrors[hour]
+    }));
+
+    // We group the hours of the day by "day period" for better analysis of when errors occur
+    // Means that our chart isn't full of so many unneccessary values
+    const timeBlocks = [
+    { label: "Morning", hours: [6,7,8,9,10,11] },
+    { label: "Afternoon", hours: [12,13,14,15,16,17] },
+    { label: "Evening", hours: [18,19,20,21,22] },
+    { label: "Night", hours: [23,0,1,2,3,4,5] }
+    ];
+
+    // We make a mapping again fr Zinggrid to appropriately map the columns
+    const groupedData = timeBlocks.map(block => {
+        let totalEngagements = 0;
+        let totalErrors = 0;
+
+        block.hours.forEach(hour => {
+            totalEngagements += hourlyEngagements[hour];
+            totalErrors += hourlyErrors[hour];
+        });
+
+        // We return an appropriate object, kind of represents a row in the chart
+        return {
+            period: block.label,
+            engagements: totalEngagements,
+            errors: totalErrors
+        };
+    });
+
+    // We actually populate our chart with info
+    document.querySelector('#groupedGrid').data = groupedData;
+    }).catch(err => console.error("Error fetching data:", err));
+    // We catch any errors if the data didn't fetch for some reason
+  </script>
+</body>
+</html>

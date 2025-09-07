@@ -66,6 +66,7 @@
 <body>
   <h1 class="mainTitle">Reporting Dashboard</h1>
 
+  <!-- We actually make the functions to pull up our various charts/grid -->
   <div class="chart-container">
     <div class="chart-title">Network Type Chart</div>
     <div id="networkTypeChart" class="chart"></div>
@@ -76,6 +77,7 @@
     <div id="timeOfDayChart" class="chart"></div>
   </div>
 
+  <!-- We define the formatting for our grid, specifically the columns and page layout -->
   <zing-grid
     id="errorGrid"
     pager
@@ -107,11 +109,13 @@
         'unknown': 0
       };
 
-      // Count users by network type
+      // Here we keep track of how many users are attributed to using a certain network
       staticData.forEach(entry => {
+        // We make sure same sessions aren't repeated
         if(!networkSessionIDs.has(entry.userSessionID)) {
           networkSessionIDs.add(entry.userSessionID)
           const type = entry.userNetworkConnection ? entry.userNetworkConnection.toLowerCase() : 'unknown';
+          // If the user's network is known, we save or its unknown
           if (networkCounts.hasOwnProperty(type)) {
             networkCounts[type]++;
           } else {
@@ -120,7 +124,7 @@
         }
       });
 
-      // Convert to chart series format
+      // Here we create the labels for our chart, and add an array to track the counts of each network type
       const networkLabels = ['WiFi', '4G', '5G', 'Unknown'];
       const networkValues = [
         networkCounts['wifi'],
@@ -129,21 +133,23 @@
         networkCounts['unknown']
       ];
 
+      // Here, we map together each networkLabel with its corresponding values
       const paired = networkLabels.map((label, i) => {
         return { label: label, value: networkValues[i] };
       });
 
-      // Sort descending by value
+      // We sort so that the buckets go from largest to smallest
       paired.sort((a, b) => a.value - b.value);
 
-      // Separate into sorted arrays
+      // We sort our arrays
       const sortedLabels = paired.map(p => p.label);
       const sortedValues = paired.map(p => p.value);
 
+      // We calculate the percentages on the buckets, just to be more informative to the user
       const total = sortedValues.reduce((a,b)=>a+b,0);
       const percentLabels = sortedValues.map(v => `${Math.round((v / total) * 100)}%`);
 
-      // Render horizontal bar chart
+      // We render our horizontal bar chart
       zingchart.render({
         id: 'networkTypeChart',
         data: {
@@ -154,7 +160,7 @@
             fontColor: 'black',
             fontWeight: 'bold'
           },
-          type: 'hbar', // changed from 'bar' to 'hbar' for horizontal bars
+          type: 'hbar',
           series: [{
             values: sortedValues,
             backgroundColor: ['#9B3192', '#B14EBB','#6A1B72','#D08ED7'],
@@ -170,6 +176,7 @@
               }))
             },
           }],
+          // Though it says scaleX, we are technically setting the y-axis for our horizonal bar chart
           scaleX: {
             labels: sortedLabels,
             label: {
@@ -184,6 +191,7 @@
               fontColor: 'black'
             }
           },
+          // Though it says scaleY, we are technicaly setting the x-axis for our horizonal bar chart
           scaleY: {
             label: {
               text: 'Number of Users',
@@ -209,6 +217,7 @@
           plotarea: {
             margin: '65px 40px 60px 120px'
           },
+          // We add a subtitle as a customization choice, so we can ensure the audience trusts us
           subtitle: {
             text: `Sample size: ${networkSessionIDs.size} sessions`,
             fontFamily: 'Comfortaa',
@@ -220,11 +229,14 @@
         width: '100%'
       });
 
+      // This method is used to extract the hour value from our timestamp in activity data
       function calculateHour(timestamp) {
+        // We parse the timestamp
         const parts = timestamp.split(', ');
         const timePiece = parts[1];
         [time, ampm] = timePiece.split(' ');
         let [hours, minutes, seconds] = time.split(':').map(Number);
+        // We save the hour under military time for ease
         if (ampm === 'PM' && hours !== 12) {
           hours += 12;
         }
@@ -234,20 +246,25 @@
         return hours;
       }
 
+      // We keep track of the engagement events per hour
       const hourlyCounts = Array(24).fill(0);
       let activityCount = 0
       let specialCount = 0
       activityData.forEach(entry => {
+        // We make sure the activity is actually an activity
         if(entry.userAction!=="idleBreak" && entry.userAction!=="pageEnter" && entry.userAction!=="pageLeave" && entry.userAction!="error") {
           const hour = calculateHour(entry.timestamp);
+          // We do some extra tracking for outputting the peak
           if(hour===21) {
             specialCount+=1;
           }
+          // We track the amount of engagement per hour and the total engagments we have
           hourlyCounts[hour]++;
           activityCount+=1;
         }
       });
 
+      // We actually render the chart
       zingchart.render({
         id: 'timeOfDayChart',
         data: {
@@ -259,6 +276,7 @@
             fontColor: "black",
             fontWeight: 'bold',
           },
+          // We keep a subtitle so that the audience trusts the data more
           subtitle: {
             text: `Based on ${activityCount} user actions`,
             fontFamily: 'Comfortaa',
@@ -276,6 +294,7 @@
               size: 4
             }
           }],
+          // We set the x-axis as the hours in the day
           scaleX: {
             label: {
               text: 'Hour of Day (0–23)',
@@ -289,6 +308,7 @@
               fontSize: 12,
               fontColor: 'black'
             },
+            // We add a grid just as a visual treat
             guide: {
               visible: true,
               lineStyle: 'solid',
@@ -296,6 +316,7 @@
               lineWidth: 1
             }
           },
+          // We set the y-axis as the number of engagement events
           scaleY: {
             label: {
               text: 'Number of Engagement Events',
@@ -309,6 +330,7 @@
               fontColor: 'black'
             }
           },
+          // We allow for hovering so that the audience can see the exact/raw values
           tooltip: {
             text: "Hour %i: %v actions",
             fontFamily: 'Comfortaa'
@@ -316,6 +338,7 @@
           plotarea: {
             margin: '60px 40px 60px 100px'
           },
+          // We integrate a little text box to showcase the peak, specifically for the audience
           labels: [
             {
               text: `Peak at hour ${21} with ${specialCount} actions`,
@@ -339,22 +362,27 @@
         width: '100%'
       });
 
+      // We make a map of the errors so we know what error is occuring, where, what kind, and how often
       const errorMap = {};
 
       activityData.forEach(entry => {
+        // We make sure we are actually looking at errors
         if (entry.userAction === 'error') {
           const key = `${entry.errorLocation}|${entry.errorMessage}`;
           if (!errorMap[key]) {
             errorMap[key] = {
+              // We track the page of the error, the type, and how often it occurred
               url: entry.errorLocation || 'Unknown',
               type: entry.errorMessage || 'Unknown Error',
               occurrences: 0,
             };
           }
+          // We make sure to track how many times it happens
           errorMap[key].occurrences += 1;
         }
       });
 
+      // We store how severe the error is, just as extra info to the user
       const getSeverity = (msg, count) => {
         const msgLower = msg.toLowerCase();
         if (msgLower.includes("referenceerror") || count > 10) return "High";
@@ -362,15 +390,18 @@
         return "Low";
       };
 
+      // We add colors to the severity variables, just to visually dictate it to the audience
       const getSeverityColor= (severity) => {
-        let color = '#7f8c8d'; // default gray
-        if (severity === 'High') color = '#e74c3c'; // red
-        else if (severity === 'Medium') color = '#f39c12'; // orange
-        else if (severity === 'Low') color = '#27ae60'; // green
+        let color = '#7f8c8d';
+        if (severity === 'High') color = '#e74c3c';
+        else if (severity === 'Medium') color = '#f39c12';
+        else if (severity === 'Low') color = '#27ae60';
 
         return `<span style="color: ${color}; font-weight: bold;">${severity}</span>`;
       };
 
+      // We create a whole object array kind of carrying all our rows
+      // Used by Zinggrid for charting
       const errorArray = Object.values(errorMap).map(entry => ({
         url: entry.url,
         type: entry.type,
@@ -378,6 +409,7 @@
         severity: getSeverityColor(getSeverity(entry.type, entry.occurrences))
       }));
 
+      // We sort our chart by the most occuring error (severe) to least
       errorArray.sort((a,b) => b.occurrences-a.occurrences)
       document.getElementById('errorGrid').data = errorArray;
     }).catch(err => console.error("Error fetching data:", err));
