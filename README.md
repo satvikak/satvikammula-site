@@ -50,6 +50,20 @@ In designing the grid, I intentionally ordered the columns to support quick unde
 
 Finally, I added functionality for controlling how many rows display at once, giving users flexibility in how they consume the data. This prevents information overload while still allowing deeper exploration when needed. Altogether, the grid balances clarity and detail, giving developers exactly the information they need to quickly identify and resolve issues that negatively impact the user experience.
 
+# Report
+
+## Hourly Site Engagement
+
+For my report's first visualization, I utilized the Hourly Site Engagement Chart from the previous section. The reason for using the method and chart style can be seen in the Dashboard section.
+
+## Engagement vs Errors by Time of Day Grid
+
+For my report's second visualization, I chose to analyze Engagement vs. Errors by Time of Day using a grid. This metric helps us understand how user activity and site errors fluctuate throughout the day, which is crucial for scheduling maintenance or updates. By comparing engagement numbers with error counts across different times of day, we can identify if errors are more likely to occur during periods of high or low activity.
+
+I decided to use a grid instead of a chart because it allows for easy comparison of multiple variables (engagement and errors) across different time periods. The grid displays the time of day, number of engagements, and error counts in a clear, structured format. This layout makes it quick and easy to spot pattens and anomalies, since we only use four engagement periods and they are all clearly diverse.
+
+I considered other options, like a bar chart, but it would have been less effective at showing both engagement and error counts in a clear, side-by-side comparison. A stacked bar chart could have combined both metrics into a single visual, but this would have made it hard to discern the individual impact of engagement versus errors. The grid, on the other hand, allows both metrics to be displayed in separate columns for each time period, making it much easier to compare them directly. This format gives a clearer view of how errors and engagement correlate, helping to identify patterns and outliers without the clutter of combined visuals.
+
 ## CSE135 HW2: Server Side Basics Done 3+ Ways
 
 ## HW2 Website Links
