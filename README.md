@@ -40,6 +40,16 @@ To visualize this data, I chose a line chart. Because the x-axis represents the 
 
 In terms of design choices, I added a chart subtitle to indicate the total dataset size, improving transparency and audience trust. I also included tooltips and grid lines, allowing users to view exact values when needed rather than estimating from the line. Finally, I highlighted the peak engagement time with a small annotation box. This directs attention to the most important insight at a glance and connects the chart directly to its practical implications for scheduling updates.
 
+## Errors per Page
+
+For my final visualization, I chose to measure errors per page. This metric is critical because a site’s primary purpose is to provide users with a smooth, functional experience. Frequent errors (such as resource loading failures, client-side script issues, or JavaScript crashes) directly impact usability and may discourage users from returning. By analyzing where errors occur, what type they are, and how often they appear, developers can prioritize fixes that will have the greatest impact on user satisfaction.
+
+To present this data, I decided on a grid rather than a chart. A grid is particularly effective when multiple attributes need to be displayed at once. In this case, the key factors I wanted to highlight were the page URL, the type of error, the number of occurrences, and the severity. While a bar or line chart could have shown error counts or trends over time, and a pie chart could have compared relative proportions, none of these formats would have captured the full context needed to take meaningful action. A grid allows developers to immediately see not just how many errors are happening, but also what kind they are and where they are happening, making it the most effective choice for this metric.
+
+In designing the grid, I intentionally ordered the columns to support quick understanding. The page URL comes first, followed by error type, occurrences, and severity—giving developers immediate insight into both the location and nature of an issue. I also sorted the rows by severity so the most pressing problems appear at the top, ensuring attention is directed where it is most needed. To further reinforce this, I used color coding (red, yellow, green) as a visual cue for severity levels. These colors provide an intuitive way to recognize critical versus minor issues at a glance.
+
+Finally, I added functionality for controlling how many rows display at once, giving users flexibility in how they consume the data. This prevents information overload while still allowing deeper exploration when needed. Altogether, the grid balances clarity and detail, giving developers exactly the information they need to quickly identify and resolve issues that negatively impact the user experience.
+
 ## CSE135 HW2: Server Side Basics Done 3+ Ways
 
 ## HW2 Website Links
