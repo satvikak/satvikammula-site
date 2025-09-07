@@ -20,6 +20,16 @@ This repository contains my work for CSE135's HWs for Summer Session 2 2025. You
 
 * Note: I was able to access the grader account by first copy pasting the below private key into a nano file. Then, I ran ssh -i "insert nano file name" grader@137.184.189.190.
 
+# Dashboard
+
+## Distribution of Users by Network Connection Type
+
+For my first chart, I chose to display the distribution of users by network connection type. This metric is important because site performance depends heavily on a user’s connection speed, and slower networks can significantly impact the experience. If a notable portion of users are on 3G or other weaker connections, we need to make sure our site remains usable by prioritizing lightweight assets and optimizing loading strategies. By surfacing this distribution, the chart helps us make design decisions that directly improve accessibility and fairness for all users, not just those with strong connections.
+
+I decided to use a horizontal bar chart to present this data. Since network type is categorical, a bar chart allows for clear comparisons between groups. A horizontal layout worked best here because it avoids cramped labels and removes the unintended sense of “trend over time” that vertical bars sometimes suggest. I also added percentage labels, tooltips with exact counts, and the total sample size so viewers can quickly understand both the magnitude and the reliability of the data.
+
+I briefly considered other options such as a pie chart, but rejected it because the percentages between categories were too close to distinguish easily in slice form. A bar chart offers more precision and readability, which makes it the best choice for this dataset. The resulting visualization not only highlights that 5G is the most common connection type, but also shows that “unknown” connections form a surprisingly large share. This insight reminds us that many users may still face constraints, and pushes us toward optimizations like compressing images, deferring noncritical JavaScript, and preparing for less reliable networks.
+
 ## CSE135 HW2: Server Side Basics Done 3+ Ways
 
 ## HW2 Website Links
