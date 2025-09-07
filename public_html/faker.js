@@ -143,6 +143,36 @@ async function generateFakeActivityData() {
   // We push a bunch of random activity data to then insert al at once
   const activityData = [];
 
+  // const errors = [
+  // 'JavaScript error occurred',
+  // 'Network request failed',
+  // 'Unhandled exception encountered',
+  // 'Resource loading error',
+  // 'Client-side script error',
+  // 'Application error detected',
+  // 'Unexpected runtime error'
+  // ] 
+  
+
+  // const numEntries = 200;
+
+  // for (let i = 0; i < numEntries; i++) {
+  //   const page = faker.helpers.arrayElement(pages);
+  //   const timestamp = faker.date.recent(7);
+  //   const errorMessage = faker.helpers.arrayElement(errors);
+
+  //   activityData.push({
+  //     sessionID: 'sess_166ep9ond',  // single, fixed session ID
+  //     userAction: 'error',
+  //     timestamp: timestamp.toLocaleString(),
+  //     errorMessage: errorMessage,
+  //     errorLocation: page,
+  //     errorLine: faker.number.int({ min: 1, max: 300 }),
+  //     errorCol: faker.number.int({ min: 1, max: 20 }),
+  //     errorObj: errorMessage
+  //   });
+  // }
+
   // Based on each unique sid, we do 1 <= x <= 5 entries
   // We know that one user can enter many different pages, not just one
   sessionIDs.forEach((sid) => {
